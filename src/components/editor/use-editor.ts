@@ -4,8 +4,7 @@ import EditorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker'
 import JSONWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
 import 'monaco-editor/monaco.d'
 import { api as GraphQLAPI, LANGUAGE_ID } from 'monaco-graphql'
-// import GraphQLWorker from 'monaco-graphql/esm/graphql.worker?worker'
-import GraphQLWorker from './graphql.worker?worker'
+import GraphQLWorker from 'monaco-graphql/esm/graphql.worker?worker'
 import { useEffect } from 'react'
 
 const setup = () => {
@@ -23,10 +22,10 @@ const setup = () => {
 }
 
 export const useEditor = (
-  config: Pick<State, 'operation' | 'gqOrigin'> & { container: string },
+  config: Pick<State, 'operation' | 'schemeUrl'> & { container: string },
   cb?: (editor: monaco.editor.IStandaloneCodeEditor) => void,
 ) => {
-  const { operation, gqOrigin, container } = config
+  const { operation, schemeUrl, container } = config
   useEffect(() => {
     setup()
 
@@ -41,15 +40,15 @@ export const useEditor = (
       minimap: { enabled: false },
     })
 
-    setConfig(editor, gqOrigin)
+    setConfig(editor, schemeUrl)
 
     cb?.(editor)
 
     return () => editor.dispose()
-  }, [operation, gqOrigin, cb])
+  }, [container, operation, schemeUrl, cb])
 }
 
-export const setConfig = (editor: monaco.editor.IStandaloneCodeEditor, gqOrigin: string) => {
+export const setConfig = (editor: monaco.editor.IStandaloneCodeEditor, schemeUrl: string) => {
   editor.getModel()?.updateOptions({
     tabSize: 2,
     indentSize: 2,
@@ -67,5 +66,5 @@ export const setConfig = (editor: monaco.editor.IStandaloneCodeEditor, gqOrigin:
     prettierConfig: { tabWidth: 2, useTabs: true, printWidth: 120 },
   })
 
-  GraphQLAPI.setSchemaUri(`${gqOrigin}/graphql`)
+  GraphQLAPI.setSchemaUri(schemeUrl)
 }

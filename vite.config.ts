@@ -6,13 +6,14 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: {
-      '@state': path.join(__dirname, './src/state'),
-      '@components': path.join(__dirname, './src/components'),
-    },
+    alias: [
+      { find: '@state', replacement: path.join(__dirname, './src/state') },
+      { find: '@components', replacement: path.join(__dirname, './src/components') },
+    ],
     preserveSymlinks: true,
   },
   optimizeDeps: {
+    include: ['react', 'react-dom', 'lodash-es', 'nullthrows', 'react/jsx-dev-runtime'],
     exclude: ['@egret/fusion-components', 'monaco-editor', 'monaco-graphql'],
   },
 })
