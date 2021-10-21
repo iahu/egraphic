@@ -18,7 +18,7 @@ function App() {
       <div id="app">
         <Header />
         <div id="main">
-          <Docs />
+          {state.docsVisable && <Docs />}
           <Operator />
           <Response />
         </div>

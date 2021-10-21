@@ -1,0 +1,45 @@
+.panel {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-rows: minmax(min-content, max-content) 1fr;
+  background: var(--box-background);
+  border: var(--border-width) solid var(--border-color);
+  box-sizing: border-box;
+}
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--padding);
+  font-weight: bold;
+  height: fit-content;
+  background: var(--background);
+  user-select: none;
+  color: var(--font-color-hightlight);
+}
+
+.panel.thin {
+  height: fit-content;
+}
+.panel.thin .panel-header {
+  font-size: smaller;
+  --padding-t: 3px;
+  --padding-b: 3px;
+}
+
+.panel-body {
+  position: relative;
+}
+
+.panel.folded .panel-body {
+  display: none;
+}
+
+.panel.hidden {
+  display: none;
+}
+
+.panel-header-folder {
+  margin-right: 0.5em;
+}

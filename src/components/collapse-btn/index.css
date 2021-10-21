@@ -1,0 +1,15 @@
+.collapse-btn {
+  display: inline-flex;
+  width: 1.2em;
+  height: 1.2em;
+  justify-content: center;
+  align-items: center;
+  /*margin: 0 0.5em;*/
+  /*border: 1px solid var(--font-color);*/
+  /*color: var(--font-color-hightlight);*/
+  /*box-sizing: border-box;*/
+  font-weight: normal;
+  cursor: pointer;
+  background: #3f6483;
+  border-radius: 2px;
+}

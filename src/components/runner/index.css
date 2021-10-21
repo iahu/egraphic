@@ -1,0 +1,11 @@
+.runner {
+  /*position: absolute;*/
+  display: inline-block;
+  right: var(--padding-r);
+  top: 0;
+  padding: 0;
+  border: none;
+  color: var(--font-color);
+  line-height: 1;
+  padding: 0 6px;
+}

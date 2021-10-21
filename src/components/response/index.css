@@ -1,3 +1,11 @@
 .response {
-  min-width: 300px;
+  position: relative;
+  flex: 1;
+  min-width: 480px;
+  overflow: hidden;
+}
+.response-container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }

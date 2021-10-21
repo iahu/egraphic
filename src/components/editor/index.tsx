@@ -1,19 +1,37 @@
+import { Header } from '@components/header'
+import { Panel } from '@components/panel'
+import { useEditor } from '@helper/use-editor'
 import { AppCtx } from '@state/app-ctx'
-import * as monaco from 'monaco-editor'
-import React, { FC, useContext, useState } from 'react'
+import { LANGUAGE_ID } from 'monaco-graphql'
+import React, { useContext, useEffect } from 'react'
+import { Runner } from '../runner'
+import { configGraphqlAPI } from './helper'
 import './index.css'
-import { useEditor } from './use-editor'
 
-import { create } from 'monaco-graphql/esm/GraphQLWorker'
+export const Editor = function Editor() {
+  const { state, dispatch } = useContext(AppCtx)
+  const editor = useEditor('#editor-container', {
+    language: LANGUAGE_ID,
+    value: state.operation,
+  })
 
-console.log(create)
+  useEffect(() => {
+    configGraphqlAPI(state.schemeUrl)
+  }, [state.schemeUrl])
 
-export const Editor: FC = () => {
-  const { state } = useContext(AppCtx)
-  const { operation, schemeUrl } = state
-  const [operationEditor, setEditor] = useState<monaco.editor.IStandaloneCodeEditor | null>(null)
+  useEffect(() => {
+    if (editor) editor.layout()
+  }, [state.variableVisable, state.docsVisable, editor])
 
-  useEditor({ container: 'editor-container', operation, schemeUrl }, setEditor)
+  useEffect(() => {
+    editor?.onDidChangeModelContent(() => {
+      dispatch({ type: 'operation', payload: editor.getValue() })
+    })
+  }, [editor, dispatch])
 
-  return <div id="editor-container"></div>
+  return (
+    <Panel className="operation-editor" header={<Header />} headerRight={<Runner editor={editor} />}>
+      <div id="editor-container"></div>
+    </Panel>
+  )
 }

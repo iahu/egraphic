@@ -1,15 +1,21 @@
 :root,
 :defined {
-  --body-background: #000;
-  --box-background: #333;
-  --background: #464646;
-  --font-color: #fff;
-  --accent-color: #39f;
-  --stroke-color: #777;
-  --border-color: #555;
+  --body-background: rgb(26, 32, 44);
+  --box-background: rgb(45, 56, 71);
+  --background: rgb(58, 69, 85);
+  --background-highlight: #2b4464;
+
+  --font-color: #eee;
+  --font-color-hightlight: #fff;
+  --accent-color: rgb(133, 228, 217);
+  --stroke-color: rgb(45, 56, 71);
+  --border-color: rgb(80, 108, 147);
   --fc-unit-size: 1px;
   --padding-t: calc(var(--fc-unit-size) * 6);
-  --padding-b: calc(var(--fc-unit-size) * 6);
+  --padding-b: var(--padding-t);
+  --padding-l: calc(var(--fc-unit-size) * 12);
+  --padding-r: var(--padding-l);
+  --padding: var(--padding-t) var(--padding-r) var(--padding-b) var(--padding-l);
 
   /*  --body-background: #f2f2f2;
   --box-background: #ccc;
@@ -17,9 +23,11 @@
   --font-color: #333;
   --accent-color: #39f;*/
 
-  --background-highlight: #11304e;
   --header-height: 38px;
   --main-height: calc(100vh - var(--header-height));
+
+  --font-size: calc(var(--fc-unit-size) * 12);
+  --border-width: calc(var(--fc-unit-size) * 1);
 }
 
 body {
@@ -30,10 +38,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: var(--body-background);
   color: var(--font-color);
+  font-size: var(--font-size);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+#app {
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template-rows: minmax(min-content, max-content) 1fr;
 }
 
 #main {
@@ -42,6 +60,7 @@ code {
   width: 100%;
   height: var(--main-height);
   justify-content: space-between;
+  box-sizing: border-box;
 }
 
 fc-panel {
@@ -51,4 +70,8 @@ fc-panel {
 
 fc-panel-header {
   border-bottom: 1px solid var(--border-color);
+}
+
+fc-panel::part(panel-body) {
+  overflow: visible;
 }

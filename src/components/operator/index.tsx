@@ -1,16 +1,13 @@
+import { Variable } from '@components/variable'
 import React, { FC } from 'react'
 import { Editor } from '../editor'
-
 import './index.css'
 
-export interface Props {}
-
-export const Operator: FC<Props> = props => {
+export const Operator: FC = () => {
   return (
     <div className="operator">
-      <fc-panel header="操作台" closable={false}>
-        <Editor />
-      </fc-panel>
+      <Editor />
+      <Variable />
     </div>
   )
 }

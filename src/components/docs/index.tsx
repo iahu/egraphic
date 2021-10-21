@@ -1,15 +1,11 @@
+import { Panel } from '@components/panel'
 import React, { FC } from 'react'
-
 import './index.css'
 
-export interface Props {}
-
-export const Docs: FC<Props> = props => {
+export const Docs: FC = () => {
   return (
     <div className="docs">
-      <fc-panel header="文档" closable={false}>
-        文档
-      </fc-panel>
+      <Panel header="文档">文档</Panel>
     </div>
   )
 }

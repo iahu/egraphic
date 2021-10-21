@@ -1,15 +1,31 @@
-import React, { FC } from 'react'
-
+import { Panel } from '@components/panel'
+import { parseJSON } from '@components/runner/helper'
+import { useEditor } from '@helper/use-editor'
+import { AppCtx } from '@state/app-ctx'
+import React, { FC, useContext, useEffect } from 'react'
 import './index.css'
 
-export interface Props {}
+export const Response: FC = () => {
+  const { state } = useContext(AppCtx)
+  const editor = useEditor('.response-container', {
+    language: 'json',
+    readOnly: true,
+    tabSize: 2,
+    minimap: { enabled: false },
+    lineNumbers: 'off',
+  })
 
-export const Response: FC<Props> = props => {
+  useEffect(() => {
+    if (editor) {
+      parseJSON(state.response).then(() => editor.setValue(state.response))
+    }
+  }, [editor, state.response])
+
   return (
     <div className="response">
-      <fc-panel header="返回值" closable={false}>
-        返回值
-      </fc-panel>
+      <Panel header="返回">
+        <div className="response-container"></div>
+      </Panel>
     </div>
   )
 }
