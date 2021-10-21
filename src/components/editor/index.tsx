@@ -1,10 +1,10 @@
-import { Header } from '@components/header'
 import { Panel } from '@components/panel'
 import { useEditor } from '@helper/use-editor'
 import { AppCtx } from '@state/app-ctx'
 import { LANGUAGE_ID } from 'monaco-graphql'
 import React, { useContext, useEffect } from 'react'
 import { Runner } from '../runner'
+import { Header } from './header'
 import { configGraphqlAPI } from './helper'
 import './index.css'
 
