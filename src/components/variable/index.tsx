@@ -12,20 +12,14 @@ export const Variable: FC = () => {
   })
 
   useEffect(() => {
-    if (editor && state.variableVisable) {
-      editor.layout()
-    }
-  }, [editor, state.variableVisable])
-
-  useEffect(() => {
     if (editor && !editor.getValue()) {
-      editor.setValue(state.variableValues)
+      editor.setValue(state.variable)
     }
-  }, [editor, state.variableValues])
+  }, [editor, state.variable])
 
   useEffect(() => {
     editor?.onDidChangeModelContent(() => {
-      dispatch({ type: 'variableValues', payload: editor.getValue() })
+      dispatch({ type: 'variable', payload: editor.getValue() })
     })
   }, [editor, dispatch])
 
@@ -34,7 +28,7 @@ export const Variable: FC = () => {
   }
 
   return (
-    <Panel header="参数" thin foldable folded={!state.variableVisable} className="values" onCollapse={handleCollapse}>
+    <Panel header="变量" thin foldable folded={!state.variableVisable} className="values" onCollapse={handleCollapse}>
       <div className="values-editor"></div>
     </Panel>
   )

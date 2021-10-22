@@ -1,0 +1,26 @@
+.address-bar {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  width: 320px;
+  background: none;
+  margin: 0 0.5em;
+  border-radius: 18px;
+  border: var(--border-width) solid transparent;
+}
+
+.address-bar:hover {
+  background-color: var(--box-background);
+  border-color: var(--border-color);
+}
+
+.address-input {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 2px 1em;
+  background: none;
+  border: none;
+  color: inherit;
+  outline: none;
+}

@@ -19,10 +19,19 @@ window.MonacoEnvironment = {
   },
 }
 
+monaco.editor.defineTheme('eger-dark', {
+  base: 'vs-dark',
+  inherit: true,
+  rules: [{ background: '#1a283e', token: 'editor.background' }],
+  colors: {
+    'editor.background': '#1a283e',
+  },
+})
+
 export const useEditor = (container: string, config?: monaco.editor.IStandaloneEditorConstructionOptions) => {
   const [editor, setEditor] = useState<monaco.editor.IStandaloneCodeEditor>()
   const { state } = useContext(AppCtx)
-  const { 'format:formatOnBlur': formatOnBlur, 'format:tabSize': tabSize } = state
+  const { formatOnBlur, tabSize } = state
   const { value = '' } = config || {}
 
   /**
@@ -42,11 +51,12 @@ export const useEditor = (container: string, config?: monaco.editor.IStandaloneE
       formatOnPaste: true,
       formatOnType: true,
       folding: true,
-      theme: 'vs-dark',
+      theme: 'eger-dark',
       tabSize: 2,
       parameterHints: { enabled: true, cycle: true },
       trimAutoWhitespace: true,
-      lineDecorationsWidth: 0,
+      lineDecorationsWidth: 3,
+      scrollBeyondLastLine: false,
       minimap: { enabled: false },
       ...config,
     })

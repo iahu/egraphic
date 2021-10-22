@@ -1,8 +1,6 @@
-import { Docs } from '@components/docs'
-import { Operator } from '@components/operator'
-import { Response } from '@components/response'
+import { QueryView } from '@components/query-view'
 import '@egret/fusion-components'
-import React, { useReducer } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import './app.css'
 import { Header } from './components/header'
 import reducer, { initState } from './state'
@@ -12,16 +10,15 @@ const AppCtxProvider = AppCtx.Provider
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initState)
+  useEffect(() => {
+    window.dispatchEvent(new UIEvent('resize'))
+  }, [state.docsVisable, state.variableVisable])
 
   return (
     <AppCtxProvider value={{ state, dispatch }}>
       <div id="app">
         <Header />
-        <div id="main">
-          {state.docsVisable && <Docs />}
-          <Operator />
-          <Response />
-        </div>
+        {state.view === 'queryView' && <QueryView />}
       </div>
     </AppCtxProvider>
   )

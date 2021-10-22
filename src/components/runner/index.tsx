@@ -3,9 +3,8 @@ import { AppCtx } from '@state/app-ctx'
 import * as graphql from 'graphql'
 import * as monaco from 'monaco-editor'
 import React, { FC, useContext, useEffect, useState } from 'react'
-import { request, gql } from 'graphql-request'
+import { getOperationNode, getQueryString, parseJSON, request } from './helper'
 import './index.css'
-import { parseJSON, getNodeRange, getOperationNode } from './helper'
 
 export interface Props {
   editor?: monaco.editor.IStandaloneCodeEditor
@@ -14,23 +13,29 @@ export interface Props {
 export const Runner: FC<Props> = props => {
   const { editor } = props
   const { state, dispatch } = useContext(AppCtx)
-  const { variableValues, headers } = state
+  const { variable, headers } = state
   const [node, setNode] = useState<graphql.OperationDefinitionNode>()
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    if (editor) {
-      const { start, end } = getNodeRange(getOperationNode(editor))
-      parseJSON(variableValues)
-        .then(variableValues => {
-          const query = gql`
-            ${editor.getValue().slice(start, end)}
-          `
-          return request(state.schemeUrl, query, variableValues, headers)
-        })
-        .then(response => {
-          dispatch({ type: 'response', payload: JSON.stringify(response, null, 2) })
-        })
-    }
+    if (!editor) return dispatch({ type: 'response', payload: '未找到到可查询内容' })
+
+    const op = getOperationNode(editor)
+    const query = getQueryString(op)
+    if (!op || !query) return dispatch({ type: 'response', payload: '无匹配的查询操作' })
+    const variableValues = parseJSON<Record<string, any>>(variable).catch(() => ({}))
+
+    dispatch({ type: 'responseStatus', payload: 'pending' })
+    dispatch({ type: 'operationName', payload: op.name?.value ?? '' })
+    variableValues
+      .then(variableValues => request(state.schemaUrl, query, variableValues, headers))
+      .then(response => {
+        dispatch({ type: 'response', payload: JSON.stringify(response, null, 2) })
+        dispatch({ type: 'responseStatus', payload: 'ok' })
+      })
+      .catch(err => {
+        dispatch({ type: 'response', payload: JSON.stringify(err, null, 2) })
+        dispatch({ type: 'responseStatus', payload: 'error' })
+      })
   }
 
   useEffect(() => {
@@ -45,7 +50,8 @@ export const Runner: FC<Props> = props => {
 
   return (
     <Btn className="runner" title="ctrl/cmd - enter" disabled={!node} onClick={handleClick}>
-      {node ? `${node.name?.value ?? 'query'} ➜` : '无操作'}
+      <span className="operation-name">{node ? node.name?.value ?? 'query' : 'no operation'}</span>
+      {node && <span className="operation-arrow">➜</span>}
     </Btn>
   )
 }

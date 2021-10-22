@@ -9,3 +9,7 @@
   height: 100%;
   width: 100%;
 }
+
+.operation-name {
+  margin-left: 0.5em;
+}

@@ -11,12 +11,26 @@
 .panel-header {
   display: flex;
   justify-content: space-between;
-  padding: var(--padding);
+  align-items: center;
+  min-height: calc(var(--fc-unit-size) * 18 + 2 * var(--padding-t));
+  padding: 0 var(--padding-l);
   font-weight: bold;
   height: fit-content;
   background: var(--background);
   user-select: none;
   color: var(--font-color-hightlight);
+}
+
+.panel-header-left,
+.panel-header-middle,
+.panel-header-right {
+  display: inline-flex;
+  align-items: center;
+}
+
+.panel-header-middle {
+  flex: 1;
+  justify-content: center;
 }
 
 .panel.thin {

@@ -1,0 +1,46 @@
+.status {
+  display: inline-block;
+  color: #aaa;
+  transform: color 0.2s;
+  --status-color: gray;
+}
+
+.status::after {
+  content: '';
+  margin-inline-start: 0.5em;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--status-color);
+  vertical-align: middle;
+}
+
+.status.ok {
+  --status-color: #00e700;
+}
+
+.status.error {
+  --status-color: red;
+}
+
+@keyframes breathing {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.status.pending {
+  --status-color: #f9ff00;
+}
+
+.status.pending::after {
+  animation: breathing 1s infinite;
+  animation-delay: 0.2s;
+}

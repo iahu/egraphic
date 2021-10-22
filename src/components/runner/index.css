@@ -1,11 +1,32 @@
 .runner {
+  font-size: 12px;
   /*position: absolute;*/
-  display: inline-block;
-  right: var(--padding-r);
+  display: inline-flex;
+  justify-content: space-between;
   top: 0;
-  padding: 0;
   border: none;
   color: var(--font-color);
   line-height: 1;
+  min-height: 22px;
   padding: 0 6px;
+  min-width: 10em;
+  box-sizing: border-box;
+}
+
+.runner .operation-name {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  width: 100%;
+  height: max-content;
+  padding: 2px 0;
+  max-width: 12em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+.runner .operation-arrow {
+  margin-left: 4px;
 }

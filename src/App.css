@@ -54,15 +54,6 @@ code {
   grid-template-rows: minmax(min-content, max-content) 1fr;
 }
 
-#main {
-  position: relative;
-  display: flex;
-  width: 100%;
-  height: var(--main-height);
-  justify-content: space-between;
-  box-sizing: border-box;
-}
-
 fc-panel {
   width: 100%;
   height: 100%;

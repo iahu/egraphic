@@ -1,7 +1,5 @@
 .collapse-btn {
   display: inline-flex;
-  width: 1.2em;
-  height: 1.2em;
   justify-content: center;
   align-items: center;
   /*margin: 0 0.5em;*/
@@ -11,5 +9,9 @@
   font-weight: normal;
   cursor: pointer;
   background: #3f6483;
-  border-radius: 2px;
+  /*border-radius: 2px;*/
+}
+
+.collapse-btn .collapse-icon {
+  font-size: 12px;
 }

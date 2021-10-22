@@ -1,3 +1,4 @@
+import { ObjectType } from '@state/'
 import * as graphql from 'graphql'
 import * as monaco from 'monaco-editor'
 import { api as GraphQLAPI } from 'monaco-graphql'
@@ -25,19 +26,59 @@ export const parseJSON = <T = unknown>(str: string) => {
   })
 }
 
-export const request = (
-  gql: string,
-  variable: string,
-  rootValue?: Record<string, any>,
-  contextValue?: Record<string, any>,
-) => {
-  return Promise.all([parseJSON<Record<string, any>>(variable), getSchema()])
-    .then(([variableValues, schema]) => {
-      const document = graphql.parse(gql)
-      return { document, schema, variableValues, rootValue, contextValue }
-    })
-    .then(graphql.execute)
+type RequestOptions = {
+  url: string
+  query: string
+  operationName?: string
+  variables?: ObjectType
+  headers?: ObjectType
 }
+
+type GraphqlErrorResponse = {
+  message: string
+  locations: { line: number; column: number }[]
+  path: (string | number)[]
+}
+type GraphqlResponse<T extends ObjectType> = {
+  data: T
+  errors: GraphqlErrorResponse[]
+}
+
+function request<T>(options: RequestOptions): Promise<GraphqlResponse<T>>
+function request<T>(
+  url: string,
+  query: string,
+  variables?: ObjectType,
+  headers?: ObjectType,
+  operationName?: string,
+): Promise<GraphqlResponse<T>>
+function request<T>(
+  url: string | RequestOptions,
+  query?: string,
+  variables?: ObjectType,
+  headers?: ObjectType,
+  operationName?: string,
+) {
+  if (typeof url === 'object') {
+    ;({ url, query, variables, headers, operationName } = url)
+  }
+
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      ...headers,
+    },
+    body: JSON.stringify({
+      query,
+      operationName,
+      variables,
+    }),
+  }).then(r => r.json()) as Promise<GraphqlResponse<T>>
+}
+
+export { request }
 
 export const isOprationNode = (node: graphql.DefinitionNode): node is graphql.OperationDefinitionNode =>
   node.kind === graphql.Kind.OPERATION_DEFINITION
@@ -68,4 +109,13 @@ export const getOperationNode = (
 export const getNodeRange = (node?: graphql.DefinitionNode) => {
   const { start = 0, end = 0 } = node?.loc ?? {}
   return { start, end }
+}
+
+export const getQueryString = (node?: graphql.OperationDefinitionNode) => {
+  if (!node) {
+    return ''
+  }
+
+  const { start, end } = getNodeRange(node)
+  return node.selectionSet?.loc?.source.body.slice(start, end)
 }
