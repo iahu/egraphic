@@ -10,6 +10,10 @@
   width: 100%;
 }
 
+.response-container .monaco-editor {
+  filter: brightness(1.3) saturate(0.8);
+}
+
 .operation-name {
   margin-left: 0.5em;
 }

@@ -1,6 +1,5 @@
 import { api } from 'monaco-graphql'
-
-export const getSchema = () => api.getSchema()
+import * as monaco from 'monaco-editor'
 
 export const setSchemaUri = (url: string) => {
   api.setSchemaUri(url)
@@ -8,7 +7,7 @@ export const setSchemaUri = (url: string) => {
 
 export const setGraphqlAPI = () => {
   api.setModeConfiguration({
-    documentFormattingEdits: true,
+    // documentFormattingEdits: true,
     documentRangeFormattingEdits: true,
     tokens: true,
     foldingRanges: true,
@@ -18,4 +17,11 @@ export const setGraphqlAPI = () => {
     documentSymbols: true,
     diagnostics: true,
   })
+}
+
+export const toGraphQLLocation = (position: monaco.IPosition) => {
+  return {
+    line: position.lineNumber,
+    column: position.column,
+  }
 }

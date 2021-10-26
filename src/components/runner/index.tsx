@@ -1,4 +1,5 @@
 import { Btn } from '@components/btn'
+import stringify from '@helper/stringify'
 import { AppCtx } from '@state/app-ctx'
 import * as graphql from 'graphql'
 import * as monaco from 'monaco-editor'
@@ -29,7 +30,7 @@ export const Runner: FC<Props> = props => {
     variableValues
       .then(variableValues => request(state.schemaUrl, query, variableValues, headers))
       .then(response => {
-        dispatch({ type: 'response', payload: JSON.stringify(response, null, 2) })
+        dispatch({ type: 'response', payload: stringify(response) })
         dispatch({ type: 'responseStatus', payload: 'ok' })
       })
       .catch(err => {

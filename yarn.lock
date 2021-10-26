@@ -404,6 +404,11 @@
   resolved "https://registry.nlark.com/@types/parse-json/download/@types/parse-json-4.0.0.tgz#2f8bb441434d163b35fb8ffdccd7138927ffb8c0"
   integrity sha1-L4u0QUNNFjs1+4/9zNcTiSf/uMA=
 
+"@types/prettier@^2.4.1":
+  version "2.4.1"
+  resolved "https://registry.npmmirror.com/@types/prettier/download/@types/prettier-2.4.1.tgz?cache=0&sync_timestamp=1632784764759&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40types%2Fprettier%2Fdownload%2F%40types%2Fprettier-2.4.1.tgz#e1303048d5389563e130f5bdd89d37a99acb75eb"
+  integrity sha1-4TAwSNU4lWPhMPW92J03qZrLdes=
+
 "@types/prop-types@*":
   version "15.7.4"
   resolved "https://registry.nlark.com/@types/prop-types/download/@types/prop-types-15.7.4.tgz?cache=0&sync_timestamp=1629708829833&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fprop-types%2Fdownload%2F%40types%2Fprop-types-15.7.4.tgz#fcf7205c25dff795ee79af1e30da2c9790808f11"
@@ -3070,16 +3075,6 @@ v8-compile-cache@^2.0.3:
   version "2.3.0"
   resolved "https://registry.nlark.com/v8-compile-cache/download/v8-compile-cache-2.3.0.tgz#2de19618c66dc247dcfb6f99338035d8245a2cee"
   integrity sha1-LeGWGMZtwkfc+2+ZM4A12CRaLO4=
-
-vite-plugin-monaco-editor-nls@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.npmmirror.com/vite-plugin-monaco-editor-nls/download/vite-plugin-monaco-editor-nls-1.0.8.tgz#5bd8395ce2860f3ae8175919dc311d9f76d9ad9a"
-  integrity sha1-W9g5XOKGDzroF1kZ3DEdn3bZrZo=
-
-vite-plugin-monaco-editor@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.npmmirror.com/vite-plugin-monaco-editor/download/vite-plugin-monaco-editor-1.0.5.tgz#beb494a280ec32a8aaa3a821c130b4578dc2c031"
-  integrity sha1-vrSUooDsMqiqo6ghwTC0V43CwDE=
 
 vite@^2.6.4:
   version "2.6.7"

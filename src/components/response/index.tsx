@@ -11,15 +11,13 @@ export const Response: FC = () => {
   const editor = useEditor('.response-container', {
     language: 'json',
     readOnly: true,
-    tabSize: 2,
-    minimap: { enabled: false },
     lineNumbers: 'off',
   })
 
   useEffect(() => {
     if (editor) {
       // parseJSON(response).then(() => editor.setValue(response))
-      editor.setValue(response)
+      editor.setValue(response || '"提示：发送 Graphql 请求以查看结果"')
     }
   }, [editor, response])
 

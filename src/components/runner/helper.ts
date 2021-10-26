@@ -26,7 +26,7 @@ export const parseJSON = <T = unknown>(str: string) => {
   })
 }
 
-type RequestOptions = {
+export type RequestOptions = {
   url: string
   query: string
   operationName?: string
@@ -34,12 +34,13 @@ type RequestOptions = {
   headers?: ObjectType
 }
 
-type GraphqlErrorResponse = {
+export type GraphqlErrorResponse = {
   message: string
   locations: { line: number; column: number }[]
   path: (string | number)[]
 }
-type GraphqlResponse<T extends ObjectType> = {
+
+export type GraphqlResponse<T extends ObjectType> = {
   data: T
   errors: GraphqlErrorResponse[]
 }
@@ -111,11 +112,11 @@ export const getNodeRange = (node?: graphql.DefinitionNode) => {
   return { start, end }
 }
 
-export const getQueryString = (node?: graphql.OperationDefinitionNode) => {
+export const getQueryString = (node?: graphql.DefinitionNode) => {
   if (!node) {
     return ''
   }
 
   const { start, end } = getNodeRange(node)
-  return node.selectionSet?.loc?.source.body.slice(start, end)
+  return node?.loc?.source.body.slice(start, end)
 }

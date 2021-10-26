@@ -6,7 +6,7 @@ import './index.css'
 
 export const Variable: FC = () => {
   const { state, dispatch } = useContext(AppCtx)
-  const editor = useEditor('.values-editor', {
+  const editor = useEditor('.variable-editor', {
     language: 'json',
     theme: 'vs-dark',
   })
@@ -28,8 +28,8 @@ export const Variable: FC = () => {
   }
 
   return (
-    <Panel header="变量" thin foldable folded={!state.variableVisable} className="values" onCollapse={handleCollapse}>
-      <div className="values-editor"></div>
+    <Panel header="变量" thin foldable folded={!state.variableVisable} className="variable" onCollapse={handleCollapse}>
+      <div className="variable-editor"></div>
     </Panel>
   )
 }

@@ -6,13 +6,14 @@ export interface Props {
   className?: string
   disabled?: boolean
   title?: string
+  ghost?: boolean
   onClick?: (event: React.MouseEvent) => void
 }
 
 export const Btn: FC<Props> = props => {
-  const { className, disabled, title, children, onClick } = props
+  const { className, disabled, title, ghost, children, onClick } = props
   return (
-    <button title={title} className={classNames('btn', className)} disabled={disabled} onClick={onClick}>
+    <button title={title} className={classNames('btn', className, { ghost })} disabled={disabled} onClick={onClick}>
       {children}
     </button>
   )

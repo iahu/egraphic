@@ -43,7 +43,9 @@
 }
 
 .panel-body {
+  display: grid;
   position: relative;
+  box-sizing: border-box;
 }
 
 .panel.folded .panel-body {

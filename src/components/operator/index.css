@@ -1,9 +1,0 @@
-.operator {
-  display: grid;
-  grid-template-rows: 1fr minmax(min-content, max-content);
-  flex: 1;
-  height: 100%;
-  overflow: hidden;
-  min-width: 520px;
-  background: var(--background);
-}

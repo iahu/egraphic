@@ -2,14 +2,14 @@
 :defined {
   --body-background: rgb(26, 32, 44);
   --box-background: rgb(45, 56, 71);
-  --background: rgb(58, 69, 85);
+  --background: #3c4b60;
   --background-highlight: #2b4464;
 
   --font-color: #eee;
   --font-color-hightlight: #fff;
   --accent-color: rgb(133, 228, 217);
   --stroke-color: rgb(45, 56, 71);
-  --border-color: rgb(80, 108, 147);
+  --border-color: rgb(80, 118, 157);
   --fc-unit-size: 1px;
   --padding-t: calc(var(--fc-unit-size) * 6);
   --padding-b: var(--padding-t);
@@ -65,4 +65,13 @@ fc-panel-header {
 
 fc-panel::part(panel-body) {
   overflow: visible;
+}
+
+.editor-container {
+  overflow: hidden;
+}
+
+.hidden,
+[hidden] {
+  display: none;
 }

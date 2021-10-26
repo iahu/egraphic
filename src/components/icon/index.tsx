@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import '//at.alicdn.com/t/font_2883781_fxakkauxy2w.js'
+import 'http://at.alicdn.com/t/font_2883781_638319wxmo.js'
 import './index.css'
 import classNames from 'classnames'
 
