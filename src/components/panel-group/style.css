@@ -1,0 +1,33 @@
+.vertical.panel-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+  height: 100%;
+}
+
+.vertical.panel-group .panel {
+  box-sizing: border-box;
+  --panel-width: 100%;
+  /*--panel-height: 1fr;*/
+}
+.vertical.panel-group .panel:first-child {
+  flex: 1;
+}
+.vertical.panel-group .panel:last-child {
+  flex-grow: 0;
+}
+
+.vertical.panel-group .panel:not(:last-child) {
+  border-bottom: none;
+}
+
+.vertical.panel-group .folded {
+  flex: unset;
+  height: fit-content;
+}
+
+/*.vertical.panel-group .panel-body {
+  display: grid;
+  grid-template-rows: 1fr minmax(min-content, max-content);
+}*/

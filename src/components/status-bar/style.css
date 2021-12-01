@@ -1,0 +1,6 @@
+.status-bar {
+  display: flex;
+  box-sizing: border-box;
+  padding: var(--padding);
+  border-top: var(--border-width) solid var(--border-color);
+}

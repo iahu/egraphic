@@ -56,7 +56,7 @@ export const SettingView: FC = () => {
 
   return (
     <Panel
-      header="设置"
+      name="设置"
       className="setting-view"
       headerRight={
         <Btn ghost onClick={handleClick}>

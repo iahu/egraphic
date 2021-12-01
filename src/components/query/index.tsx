@@ -3,20 +3,17 @@ import { useEditor } from '@helper/use-editor'
 import { AppCtx } from '@state/app-ctx'
 import * as monaco from 'monaco-editor'
 import { LANGUAGE_ID } from 'monaco-graphql'
-import { parse, visit, Kind } from 'graphql/language'
 import React, { useContext, useEffect } from 'react'
 import { Runner } from '../runner'
-import { Header } from './header'
 import { setGraphqlAPI, setSchemaUri } from './helper'
 import './index.css'
-import { getSchema } from '@components/runner/helper'
 
 export const Query = function Editor() {
   const { state, dispatch } = useContext(AppCtx)
   const editor = useEditor('#query-editor', {
     language: LANGUAGE_ID,
     value: state.query,
-    theme: 'vs-dark',
+    theme: 'egert',
   })
 
   useEffect(() => {
@@ -83,8 +80,12 @@ export const Query = function Editor() {
   //   })
   // }, [editor])
 
+  const onResize = () => {
+    window.dispatchEvent(new UIEvent('resize'))
+  }
+
   return (
-    <Panel className="query-panel" header={<Header />} headerRight={<Runner editor={editor} />}>
+    <Panel className="query-panel" name="查询" headerRight={<Runner editor={editor} />} onResize={onResize}>
       <div id="query-editor"></div>
     </Panel>
   )

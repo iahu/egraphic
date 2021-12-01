@@ -8,7 +8,7 @@ export const Variable: FC = () => {
   const { state, dispatch } = useContext(AppCtx)
   const editor = useEditor('.variable-editor', {
     language: 'json',
-    theme: 'vs-dark',
+    theme: 'egert',
   })
 
   useEffect(() => {
@@ -27,8 +27,22 @@ export const Variable: FC = () => {
     dispatch({ type: 'variableVisable', payload: !collapsed })
   }
 
+  const onResize = () => window.dispatchEvent(new UIEvent('resize'))
+
   return (
-    <Panel header="变量" thin foldable folded={!state.variableVisable} className="variable" onCollapse={handleCollapse}>
+    <Panel
+      name="变量"
+      width="auto"
+      height="200px"
+      minimize={!state.variableVisable}
+      className="variable"
+      closeBtn
+      minimizeBtn
+      onMinimize={handleCollapse}
+      // header={false}
+      resizable={{ n: true, originY: 'bottom' }}
+      onResize={onResize}
+    >
       <div className="variable-editor"></div>
     </Panel>
   )

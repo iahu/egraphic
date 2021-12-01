@@ -1,0 +1,9 @@
+.sidebar {
+  box-sizing: border-box;
+  height: 100vh;
+  min-width: 40px;
+  width: 200px;
+  flex-shrink: 0;
+  overflow: auto;
+  background: var(--background);
+}

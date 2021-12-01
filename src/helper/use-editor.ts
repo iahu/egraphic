@@ -22,14 +22,11 @@ window.MonacoEnvironment = {
   },
 }
 
-monaco.editor.defineTheme('eger-dark', {
-  base: 'vs-dark',
+monaco.editor.defineTheme('egert', {
+  base: 'vs',
   inherit: true,
-  rules: [{ background: '#1b2b45', token: 'editor.background' }],
-  colors: {
-    'editor.background': '#1b2b45',
-    'editor.lineHighlightBorder': '#1b2b45',
-  },
+  rules: [],
+  colors: {},
 })
 
 const registerJSONFormatProvider = () => {
@@ -100,13 +97,19 @@ export const useEditor = (container: string, config?: monaco.editor.IStandaloneE
       formatOnPaste: true,
       formatOnType: true,
       folding: true,
-      theme: 'eger-dark',
+      theme: 'egert',
       tabSize,
       parameterHints: { enabled: true, cycle: true },
       trimAutoWhitespace: true,
-      lineDecorationsWidth: 3,
+      lineDecorationsWidth: 1,
+      renderLineHighlight: 'none',
+      lineNumbersMinChars: 4,
       scrollBeyondLastColumn: 0,
       scrollBeyondLastLine: false,
+      scrollbar: {
+        verticalScrollbarSize: 8,
+        horizontalScrollbarSize: 8,
+      },
       minimap: { enabled: false },
       ...config,
     })

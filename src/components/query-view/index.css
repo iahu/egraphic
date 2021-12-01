@@ -1,15 +1,10 @@
 .query-view {
+  position: relative;
   display: flex;
+  overflow: hidden;
   flex: 1;
-  box-sizing: border-box;
 }
 
-.operator {
-  display: grid;
-  grid-template-rows: 1fr minmax(min-content, max-content);
-  flex: 1;
-  height: 100%;
-  overflow: hidden;
-  min-width: 520px;
-  background: var(--background);
+.query-editor-group {
+  border-right: var(--border-width) solid var(--stroke-color);
 }

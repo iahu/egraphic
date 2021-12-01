@@ -8,19 +8,24 @@
   align-items: center;
   font-weight: normal;
   cursor: pointer;
-  background: #3f6483;
-  color: inherit;
+  background: var(--accent-color);
+  color: var(--font-color);
   /*border-radius: 2px;*/
   line-height: 1;
   padding: 0 2px;
+  transition: all 0.2s;
 }
 
 .btn:hover {
   opacity: 0.8;
+  color: var(--font-color-hover);
+  background: var(--accent-color-hover);
 }
 
 .btn:disabled {
-  background: rgba(125, 125, 125, 0.5);
+  color: var(--font-color-disabled);
+  background: var(--accent-color-disabled);
+  cursor: not-allowed;
 }
 
 .btn.ghost {

@@ -1,9 +1,11 @@
 .icon {
+  display: inline-flex;
   --icon-size: 1.4em;
   font-size: var(--icon-size);
-  width: 1em;
-  height: 1em;
+  width: var(--icon-size, 1em);
+  height: var(--icon-size, 1em);
   vertical-align: middle;
   fill: currentColor;
   overflow: hidden;
+  box-sizing: border-box;
 }

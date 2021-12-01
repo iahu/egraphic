@@ -1,17 +1,13 @@
 .response {
   position: relative;
   flex: 1;
-  min-width: 480px;
-  overflow: hidden;
+  /*overflow: hidden;*/
+  /*min-width: 480px;*/
 }
 .response-container {
   position: absolute;
-  height: 100%;
   width: 100%;
-}
-
-.response-container .monaco-editor {
-  filter: brightness(1.3) saturate(0.8);
+  height: 100%;
 }
 
 .operation-name {

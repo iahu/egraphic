@@ -1,4 +1,5 @@
 import { Btn } from '@components/btn'
+import { IconBtn } from '@components/icon-btn'
 import stringify from '@helper/stringify'
 import { AppCtx } from '@state/app-ctx'
 import * as graphql from 'graphql'
@@ -50,9 +51,9 @@ export const Runner: FC<Props> = props => {
   }, [editor])
 
   return (
-    <Btn className="runner" title="ctrl/cmd - enter" disabled={!node} onClick={handleClick}>
-      <span className="operation-name">{node ? node.name?.value ?? 'query' : 'no operation'}</span>
-      {node && <span className="operation-arrow">➜</span>}
-    </Btn>
+    <div className="runner" title="ctrl/cmd - enter">
+      <span className="operation-name">{node ? node.name?.value ?? 'query' : '无操作'}</span>
+      <IconBtn id="icon-send" disabled={!node} onClick={handleClick} size={14} />
+    </div>
   )
 }

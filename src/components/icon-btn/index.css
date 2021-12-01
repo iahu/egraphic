@@ -1,0 +1,22 @@
+.icon-btn.btn {
+  display: inline-flex;
+  height: fit-content;
+  padding: 1px;
+  min-width: initial;
+  min-height: initial;
+}
+
+.icon-btn.btn:hover {
+  opacity: 1;
+  background: var(--accent-color-hover);
+}
+
+.icon-btn.circle {
+  border-radius: 50%;
+  /*overflow: hidden;*/
+}
+
+.icon-btn.border {
+  padding: 0;
+  border: var(--border-width) solid var(--border-color);
+}

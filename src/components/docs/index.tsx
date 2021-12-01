@@ -14,7 +14,7 @@ export const Docs: FC = () => {
 
   return (
     <div className="docs">
-      <Panel header="文档">文档</Panel>
+      <Panel name="文档">文档</Panel>
     </div>
   )
 }

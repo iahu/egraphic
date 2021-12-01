@@ -1,9 +1,11 @@
 .variable {
+  position: relative;
   box-sizing: border-box;
+  min-height: 20px;
 }
 
 .variable-editor {
-  min-height: 200px;
+  position: absolute;
   width: 100%;
   height: 100%;
 }

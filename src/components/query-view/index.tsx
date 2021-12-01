@@ -1,4 +1,5 @@
 import { Docs } from '@components/docs'
+import { PanelGroup } from '@components/panel-group'
 import { Query } from '@components/query'
 import { Response } from '@components/response'
 import { Variable } from '@components/variable'
@@ -13,13 +14,18 @@ export interface Props {
 export const QueryView: FC<Props> = React.memo(function QueryView(props: Props) {
   const { hidden = false } = props
   const { state } = useContext(AppCtx)
+  const onResize = () => {
+    window.dispatchEvent(new UIEvent('resize'))
+  }
+
   return (
     <div className="query-view" aria-hidden={hidden} hidden={hidden}>
       {state.docsVisable && <Docs />}
-      <div className="operator">
+
+      <PanelGroup className="query-editor-group" width="50%" height="100%" resizable={{ e: true }} onResize={onResize}>
         <Query />
         <Variable />
-      </div>
+      </PanelGroup>
       <Response />
     </div>
   )

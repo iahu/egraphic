@@ -1,24 +1,43 @@
 .panel {
   position: relative;
-  display: grid;
-  width: 100%;
-  height: 100%;
-  grid-template-rows: minmax(min-content, max-content) 1fr;
-  background: var(--box-background);
-  border: var(--border-width) solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  width: var(--panel-width, 100%);
+  height: var(--panel-height, 100%);
   box-sizing: border-box;
+  /*display: grid;*/
+  /*grid-template-rows: minmax(min-content, max-content) 1fr;*/
+  background: var(--background);
+  overflow: hidden;
+  /*box-shadow: 0 0 var(--shadow-width) 0 var(--shadow-color);*/
+  /*border-radius: var(--border-radius);*/
 }
+
+.panel.border {
+  border: var(--border-width) solid var(--border-color);
+}
+
+.panel.maximize {
+  position: fixed;
+  left: 0;
+  top: 0;
+  transform: none !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 999;
+}
+
 .panel-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: calc(var(--fc-unit-size) * 18 + 2 * var(--padding-t));
-  padding: 0 var(--padding-l);
+  padding: var(--padding);
   font-weight: bold;
   height: fit-content;
-  background: var(--background);
+  background: var(--box-background);
   user-select: none;
   color: var(--font-color-hightlight);
+  border-bottom: var(--border-width) solid var(--border-color);
 }
 
 .panel-header-left,
@@ -28,14 +47,48 @@
   align-items: center;
 }
 
+.panel-header-left {
+  grid-gap: calc(var(--fc-unit-size) * 4);
+}
+
+.panel-header-left .icon-btn {
+  opacity: 0.75;
+}
+.panel-header-left .icon-btn.close-btn:hover {
+  background: #fc4546;
+  border-color: #fc4546;
+  color: #eee;
+}
+.panel-header-left .icon-btn.minimize-btn:hover {
+  background: #fcb024;
+  border-color: #fcb024;
+  color: #eee;
+}
+
+.maximize .panel-header-left .icon-btn.maximize-btn,
+.panel-header-left .icon-btn.maximize-btn:hover {
+  background: #28c131;
+  border-color: #28c131;
+  color: #eee;
+}
+
+.panel-header-left .icon-btn:disabled,
+.panel-header-left .icon-btn:disabled:hover {
+  background: var(--background-disabled);
+  border-color: var(--border-color);
+  color: var(--background-disabled);
+  cursor: not-allowed;
+}
+
+.panel-header-left .icon-btn:last-of-type {
+  margin-right: var(--padding-l);
+}
+
 .panel-header-middle {
   flex: 1;
   justify-content: center;
 }
 
-.panel.thin {
-  height: fit-content;
-}
 .panel.thin .panel-header {
   font-size: smaller;
   --padding-t: 3px;
@@ -43,13 +96,26 @@
 }
 
 .panel-body {
-  display: grid;
+  /*display: grid;*/
+  display: flex;
+  flex-direction: column;
   position: relative;
   box-sizing: border-box;
+  height: 100%;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+.panel.folded {
+  height: fit-content !important;
+  /*width: fit-content;*/
+  min-width: 0;
+  min-height: 0;
 }
 
 .panel.folded .panel-body {
-  display: none;
+  display: none !important;
+  height: 0;
+  visibility: hidden;
 }
 
 .panel.hidden {
@@ -58,4 +124,79 @@
 
 .panel-header-folder {
   margin-right: 0.5em;
+}
+
+.panel-resize-bar {
+  --resize-bar-size: 2px;
+  --resize-bar-border: 1px;
+  --resize-anchor-size: 8px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  border: 0 solid var(--border-color);
+}
+
+.panel-resize-left {
+  left: 0;
+  width: var(--resize-bar-size);
+  border-left-width: var(--resize-bar-border);
+  cursor: ew-resize;
+}
+
+.panel-resize-right {
+  right: 0;
+  width: var(--resize-bar-size);
+  border-right-width: var(--resize-bar-border);
+  cursor: ew-resize;
+}
+
+.panel-resize-top {
+  top: 0;
+  height: var(--resize-bar-size);
+  border-top-width: var(--resize-bar-border);
+  cursor: ns-resize;
+}
+
+.panel-resize-bottom {
+  bottom: 0;
+  height: var(--resize-bar-size);
+  border-bottom-width: var(--resize-bar-border);
+  cursor: ns-resize;
+}
+
+.panel-resize-right-bottom {
+  right: 0;
+  bottom: 0;
+  width: var(--resize-anchor-size);
+  height: var(--resize-anchor-size);
+  cursor: nwse-resize;
+}
+
+.panel-resize-left-bottom {
+  left: 0;
+  bottom: 0;
+  width: var(--resize-anchor-size);
+  height: var(--resize-anchor-size);
+  cursor: nesw-resize;
+}
+
+.panel-resize-left-top {
+  left: 0;
+  top: 0;
+  width: var(--resize-anchor-size);
+  height: var(--resize-anchor-size);
+  cursor: nw-resize;
+}
+
+.panel-resize-right-top {
+  right: 0;
+  top: 0;
+  width: var(--resize-anchor-size);
+  height: var(--resize-anchor-size);
+  cursor: ne-resize;
+}
+
+.panel-resize-bar:hover {
+  border-color: var(--border-color-hover);
 }

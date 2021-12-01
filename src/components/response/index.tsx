@@ -24,7 +24,10 @@ export const Response: FC = () => {
   return (
     <Panel
       className="response"
-      header="返回结果"
+      name="返回结果"
+      width="50%"
+      closeBtn
+      maximizeBtn
       headerRight={
         <Status className="operation-name" status={responseStatus}>
           {!!response && operationName}

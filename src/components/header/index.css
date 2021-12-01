@@ -6,7 +6,7 @@
   font-weight: bold;
   padding: 0 12px;
   min-height: var(--header-height);
-  background: var(--background-highlight);
+  background: var(--background);
   border-bottom: 1px solid var(--border-color);
   box-sizing: border-box;
 }
