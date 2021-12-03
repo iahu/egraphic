@@ -5,6 +5,32 @@ export type ObjectType<T = unknown> = Record<string | number, T>
 export type Status = 'ok' | 'error' | 'pending'
 type ViewType = `${string}View`
 
+export interface QueryFile {
+  id: string
+  name: string
+  createTime: number
+  lastModified: number
+}
+
+export interface FileType extends QueryFile {
+  type: 'file'
+  // file content
+  content: {
+    query: string
+    variable: ''
+    response: ''
+  }
+}
+
+export interface FolderType extends QueryFile {
+  type: 'folder'
+  fileList: FileSet[]
+}
+
+export type FileSet = FileType | FolderType
+
+export type FileSetList = FileSet[]
+
 export const initState = {
   // inner global variable
   queryEditor: null as monaco.editor.IStandaloneCodeEditor | null,
@@ -14,6 +40,7 @@ export const initState = {
   query: getItem('egraphic.query', 'query {\n  \n}'),
   variable: getItem('egraphic.variable', '{}'),
   docsVisable: getItem('egraphic.docsVisable', false),
+  sidebarVisable: getItem('egraphic.sidebarVisable', false),
   variableVisable: getItem('egraphic.variableValues', false),
   view: getItem('egraphic.view', 'queryView' as ViewType),
 
@@ -30,6 +57,8 @@ export const initState = {
   // editor format
   tabSize: getItem('editor.tabSize', 2),
   formatOnBlur: getItem('editor.formatOnBlur', true),
+
+  fileList: getItem<FileSetList>('editor.fileList', []),
 }
 
 export type State = typeof initState
@@ -41,6 +70,7 @@ export type Action =
   | { type: 'query'; payload: string }
   | { type: 'variable'; payload: string }
   | { type: 'docsVisable'; payload: boolean }
+  | { type: 'sidebarVisable'; payload: boolean }
   | { type: 'variableVisable'; payload: boolean }
   | { type: 'rootValue'; payload: ObjectType }
   | { type: 'contextValue'; payload: ObjectType }
@@ -50,6 +80,7 @@ export type Action =
   | { type: 'operationName'; payload: string }
   | { type: 'tabSize'; payload: number }
   | { type: 'formatOnBlur'; payload: boolean }
+  | { type: 'fileList'; payload: FileSetList }
 
 const reducer = (state: State, action: Action): State => {
   /**
@@ -75,6 +106,9 @@ const reducer = (state: State, action: Action): State => {
     case 'docsVisable':
       setItem('egraphic.docsVisable', action.payload)
       return { ...state, docsVisable: action.payload }
+    case 'sidebarVisable':
+      setItem('egraphic.sidebarVisable', action.payload)
+      return { ...state, sidebarVisable: action.payload }
 
     // editor format
     case 'tabSize':
@@ -103,6 +137,10 @@ const reducer = (state: State, action: Action): State => {
     case 'operationName':
       setItem('query.operationName', action.payload)
       return { ...state, operationName: action.payload }
+
+    case 'fileList':
+      setItem('editor.fileList', action.payload)
+      return { ...state, fileList: action.payload }
 
     default:
       return state

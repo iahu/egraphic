@@ -22,7 +22,7 @@ export const QueryView: FC<Props> = React.memo(function QueryView(props: Props) 
     <div className="query-view" aria-hidden={hidden} hidden={hidden}>
       {state.docsVisable && <Docs />}
 
-      <PanelGroup className="query-editor-group" width="50%" height="100%" resizable={{ e: true }} onResize={onResize}>
+      <PanelGroup className="query-editor-group" width="44%" height="100%" resizable={{ e: true }} onResize={onResize}>
         <Query />
         <Variable />
       </PanelGroup>

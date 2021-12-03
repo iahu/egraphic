@@ -141,11 +141,11 @@ export const useEditor = (container: string, config?: monaco.editor.IStandaloneE
   }, [editor, value, setPosition])
 
   useEffect(() => {
-    if (editor && tabSize >= 0) {
+    if (formatOnBlur && editor && tabSize >= 0) {
       editor.updateOptions({ tabSize })
       editor.getAction('editor.action.formatDocument')?.run()
     }
-  }, [editor, tabSize])
+  }, [editor, tabSize, formatOnBlur])
 
   useEffect(() => {
     if (!editor) return

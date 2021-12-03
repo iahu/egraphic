@@ -19,6 +19,10 @@
     "sourceMap": true,
     "typeRoots": ["./node_modules/@types", "./types"],
     "paths": {
+      "@assets": ["./assets/"],
+      "@state": ["./state/"],
+      "@helper": ["./helper/"],
+      "@components": ["./components"],
       "@assets/*": ["./assets/*"],
       "@state/*": ["./state/*"],
       "@helper/*": ["./helper/*"],

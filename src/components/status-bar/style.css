@@ -1,6 +1,36 @@
 .status-bar {
   display: flex;
+  justify-content: space-between;
   box-sizing: border-box;
   padding: var(--padding);
   border-top: var(--border-width) solid var(--border-color);
+}
+
+.status-bar-left,
+.status-bar-right {
+  display: inline-flex;
+  align-items: center;
+  font-size: calc(var(--fc-unit-size) * 12);
+  grid-gap: calc(var(--fc-unit-size) * 18);
+}
+
+.status-bar .status-bar-selector {
+  --border-width: 0;
+  --padding-t: 0;
+  --padding-b: 0;
+  --control-min-width: calc(var(--fc-unit-size) * 60);
+}
+
+.status-bar-listbox:defined {
+  --padding-l: 0;
+  --padding-r: 0;
+}
+.status-bar-listbox fc-list-option:defined {
+  --padding-t: 0;
+  --padding-b: 0;
+  min-width: calc(var(--fc-unit-size) * 60);
+}
+
+.status-bar-listbox fc-list-option[selected] {
+  background: var(--background-selected);
 }

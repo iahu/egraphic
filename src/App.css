@@ -4,17 +4,21 @@
   --box-background: #f3f3f3;
   --box-background-disabled: #ddd;
   --background: rgb(233, 233, 233);
-  --background-hover: #f3f3f3;
+  --background-hover: #e1e1e1;
+  --background-active: #ccc;
   --background-disabled: #ddd;
   --background-highlight: rgb(232, 232, 231);
+  --background-selected: #f3f3f3;
 
-  --font-color: #3c3c3c;
-  --font-color-hover: #000;
-  --font-color-disabled: #888;
-  --font-color-hightlight: #000;
-  --accent-color: #d8dcce;
-  --accent-color-hover: #ecf1e6;
-  --accent-color-disabled: rgb(215, 215, 215);
+  --foreground: #444;
+  --foreground-hover: #000;
+  --foreground-selected: #000;
+  --foreground-disabled: #888;
+  --foreground-hightlight: #000;
+  --accent-color: #5091ff;
+  --accent-color-hover: #f3f3f3;
+  --accent-color-selected: #88aeff;
+  --accent-color-disabled: #e6e6e6;
   --border-color: #c9c9c9;
   --border-color-hover: #dcdcdc;
   --border-color-disabled: #eff3f2;
@@ -24,7 +28,7 @@
   --fc-unit-size: 1px;
   --padding-t: calc(var(--fc-unit-size) * 2);
   --padding-b: var(--padding-t);
-  --padding-l: calc(var(--fc-unit-size) * 10);
+  --padding-l: calc(var(--fc-unit-size) * 6);
   --padding-r: var(--padding-l);
   --padding: var(--padding-t) var(--padding-r) var(--padding-b) var(--padding-l);
 
@@ -36,7 +40,7 @@
 
   --font-size: calc(var(--fc-unit-size) * 12);
   --border-width: calc(var(--fc-unit-size) * 1);
-  --border-radius: calc(var(--fc-unit-size) * 4);
+  --border-radius: calc(var(--fc-unit-size) * 0);
 }
 
 body {
@@ -46,7 +50,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--body-background);
-  color: var(--font-color);
+  color: var(--foreground);
   font-size: var(--font-size);
 }
 
@@ -104,14 +108,14 @@ fc-panel::part(panel-body) {
 }
 
 .fg {
-  color: var(--font-color);
+  color: var(--foreground);
 }
 .fg:hover,
 .fg:active {
-  color: var(--font-color-hover);
+  color: var(--foreground-hover);
 }
 .fg:disabled {
-  color: var(--font-color-disabled);
+  color: var(--foreground-disabled);
 }
 
 .fg-accent {

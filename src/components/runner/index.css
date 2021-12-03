@@ -6,7 +6,7 @@
   align-items: center;
   top: 0;
   border: none;
-  color: var(--font-color);
+  color: var(--foreground);
   line-height: 1;
   /*min-height: 22px;*/
   padding: 0 6px;

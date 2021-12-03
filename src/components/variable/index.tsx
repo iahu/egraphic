@@ -39,7 +39,7 @@ export const Variable: FC = () => {
       closeBtn
       minimizeBtn
       onMinimize={handleCollapse}
-      // header={false}
+      header={false}
       resizable={{ n: true, originY: 'bottom' }}
       onResize={onResize}
     >

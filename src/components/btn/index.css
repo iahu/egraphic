@@ -2,14 +2,14 @@
   display: inline-flex;
   border: none;
   padding: 0;
-  min-width: 1.2em;
-  min-height: 1.2em;
+  /*min-width: 1.2em;*/
+  /*min-height: 1.2em;*/
   justify-content: center;
   align-items: center;
-  font-weight: normal;
+  font: inherit;
   cursor: pointer;
   background: var(--accent-color);
-  color: var(--font-color);
+  color: var(--foreground);
   /*border-radius: 2px;*/
   line-height: 1;
   padding: 0 2px;
@@ -18,12 +18,12 @@
 
 .btn:hover {
   opacity: 0.8;
-  color: var(--font-color-hover);
+  color: var(--foreground-hover);
   background: var(--accent-color-hover);
 }
 
 .btn:disabled {
-  color: var(--font-color-disabled);
+  color: var(--foreground-disabled);
   background: var(--accent-color-disabled);
   cursor: not-allowed;
 }

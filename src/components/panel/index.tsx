@@ -44,7 +44,7 @@ export interface Props {
 export const Panel: FC<Props> = props => {
   const {
     className,
-    thin = true,
+    thin = false,
     name,
     children,
     header = true,

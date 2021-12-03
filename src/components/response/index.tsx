@@ -25,9 +25,10 @@ export const Response: FC = () => {
     <Panel
       className="response"
       name="返回结果"
-      width="50%"
+      width="56%"
       closeBtn
       maximizeBtn
+      border={false}
       headerRight={
         <Status className="operation-name" status={responseStatus}>
           {!!response && operationName}

@@ -1,0 +1,12 @@
+.context-menu:defined {
+  position: fixed;
+  --padding-t: calc(var(--fc-unit-size) * 6);
+  --padding-b: calc(var(--fc-unit-size) * 6);
+  --padding-l: calc(var(--fc-unit-size) * 4);
+  --padding-r: calc(var(--fc-unit-size) * 4);
+}
+
+.context-menu fc-menu-item [slot='before'] {
+  display: flex;
+  align-items: center;
+}
