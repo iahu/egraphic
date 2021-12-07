@@ -1,4 +1,5 @@
-import { FileType, FolderType } from '@state'
+import { FileSetList, FileType, FolderType } from '@state'
+import { TypeMap } from 'graphql/type/schema'
 
 export const fireResizeEvent = () => {
   window.dispatchEvent(new UIEvent('resize'))
@@ -30,6 +31,31 @@ export const createFolder = (name: string): FolderType => {
     type: 'folder',
     createTime: now,
     lastModified: now,
-    FileList: [],
+    fileList: [],
   }
+}
+
+export const findFile = (fileSetList: FileSetList, id: string): FileType | undefined => {
+  for (let i = 0; i < fileSetList.length; ++i) {
+    const file = fileSetList[i]
+    if (file.type === 'file' && file.id === id) {
+      return file
+    }
+
+    if (file.type === 'folder' && file.fileList?.length) {
+      const find = findFile(file.fileList, id)
+      if (find) {
+        return find
+      }
+    }
+  }
+}
+
+export const filterFileList = (fileSetList: FileSetList, id: string): FileSetList => {
+  return fileSetList.filter(file => {
+    if (file.type === 'folder' && file.fileList?.length) {
+      file.fileList = filterFileList(file.fileList, id)
+    }
+    return file.id !== id
+  })
 }

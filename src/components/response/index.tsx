@@ -5,7 +5,12 @@ import { AppCtx } from '@state/app-ctx'
 import React, { FC, useContext, useEffect } from 'react'
 import './index.css'
 
-export const Response: FC = () => {
+export interface Props {
+  width?: string | number
+}
+
+export const Response: FC<Props> = props => {
+  const { width } = props
   const { state } = useContext(AppCtx)
   const { response, responseStatus, operationName } = state
   const editor = useEditor('.response-container', {
@@ -25,7 +30,6 @@ export const Response: FC = () => {
     <Panel
       className="response"
       name="返回结果"
-      width="56%"
       closeBtn
       maximizeBtn
       border={false}
@@ -35,6 +39,7 @@ export const Response: FC = () => {
         </Status>
       }
       data-status={responseStatus}
+      width={width}
     >
       <div className="response-container"></div>
     </Panel>

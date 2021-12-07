@@ -8,14 +8,9 @@ export const Variable: FC = () => {
   const { state, dispatch } = useContext(AppCtx)
   const editor = useEditor('.variable-editor', {
     language: 'json',
+    value: state.variable,
     theme: 'egert',
   })
-
-  useEffect(() => {
-    if (editor && !editor.getValue()) {
-      editor.setValue(state.variable)
-    }
-  }, [editor, state.variable])
 
   useEffect(() => {
     editor?.onDidChangeModelContent(() => {
@@ -33,7 +28,7 @@ export const Variable: FC = () => {
     <Panel
       name="变量"
       width="auto"
-      height="200px"
+      height="100px"
       minimize={!state.variableVisable}
       className="variable"
       closeBtn

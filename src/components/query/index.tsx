@@ -46,46 +46,13 @@ export const Query = function Editor() {
     })
   }, [editor])
 
-  // useEffect(() => {
-  //   if (!editor) return
-  //   /**
-  //    * @todo hover 提示 GraphQL type
-  //    */
-  //   monaco.languages.registerHoverProvider(LANGUAGE_ID, {
-  //     provideHover(model, position) {
-  //       const ast = parse(model.getValue())
-  //       const { lineNumber, column: lineColumn } = position
-  //       visit(ast, {
-  //         enter(node, key, parent, path, ancestors) {
-  //           if (node.kind === Kind.NAMED_TYPE) {
-  //             const {
-  //               name: { value },
-  //               loc: { startToken: { line = -1, column = -1 } = {} } = {},
-  //             } = node
-
-  //             if (line === lineNumber && column <= lineColumn && lineColumn <= value.length + column) {
-  //               getSchema().then(schema => {
-  //                 console.log(schema, path, ancestors[2])
-  //               })
-  //             }
-  //           }
-  //         },
-  //       })
-
-  //       return {
-  //         range: new monaco.Range(1, 1, model.getLineCount(), model.getLineMaxColumn(model.getLineCount())),
-  //         contents: [],
-  //       }
-  //     },
-  //   })
-  // }, [editor])
-
   const onResize = () => {
     window.dispatchEvent(new UIEvent('resize'))
   }
+  const [{ name = '查询' } = {}] = state.openedFileList
 
   return (
-    <Panel className="query-panel" name="查询" headerRight={<Runner editor={editor} />} onResize={onResize}>
+    <Panel className="query-panel" name={name} headerRight={<Runner editor={editor} />} onResize={onResize}>
       <div id="query-editor"></div>
     </Panel>
   )

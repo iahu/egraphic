@@ -1,12 +1,13 @@
 import { Btn } from '@components/btn'
 import { IconBtn } from '@components/icon-btn'
-import { FCDropdown, FCListBox } from '@egret/fusion-components'
+import { FCListBox } from '@egret/fusion-components'
 import { AppCtx } from '@state/app-ctx'
 import React, { useContext } from 'react'
 import './style.css'
 
 export const StatusBar = () => {
   const { dispatch, state } = useContext(AppCtx)
+  const { docsVisable } = state
   const toggleSidebar = (e: React.MouseEvent) => {
     e.preventDefault()
     dispatch({ type: 'sidebarVisable', payload: !state.sidebarVisable })
@@ -16,22 +17,21 @@ export const StatusBar = () => {
     const { target } = e
     if (target instanceof FCListBox) {
       dispatch({ type: 'tabSize', payload: Number(target.value) })
-      // const dropdown = target.closest<FCDropdown>('fc-dropdown')
-      // setTimeout(() => {
-      //   if (dropdown) {
-      //     dropdown.open = false
-      //   }
-      // })
     }
   }
   const toggleAutoFormat = () => {
     dispatch({ type: 'formatOnBlur', payload: !state.formatOnBlur })
+  }
+  const handleClickDocBtn = (e: React.MouseEvent) => {
+    e.preventDefault()
+    dispatch({ type: 'docsVisable', payload: !docsVisable })
   }
 
   return (
     <div className="status-bar">
       <div className="status-bar-left">
         <IconBtn id="icon-sidebar_left" title="Toggle Sidebar" onClick={toggleSidebar} />
+        <IconBtn id="icon-book" title="Toggle Document Panel" onClick={handleClickDocBtn} />
       </div>
       <div className="status-bar-right">
         <fc-dropdown class="status-bar-selector">

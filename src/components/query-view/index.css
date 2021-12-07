@@ -8,3 +8,12 @@
 .query-editor-group {
   border-right: var(--border-width) solid var(--stroke-color);
 }
+
+.not-open-file-tips {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  font-size: calc(var(--fc-unit-size) * 14);
+  color: #999;
+}

@@ -17,7 +17,7 @@ export const Runner: FC<Props> = props => {
   const { state, dispatch } = useContext(AppCtx)
   const { variable, headers } = state
   const [node, setNode] = useState<graphql.OperationDefinitionNode>()
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (e: React.MouseEvent | Event) => {
     e.preventDefault()
     if (!editor) return dispatch({ type: 'response', payload: '未找到到可查询内容' })
 
@@ -50,10 +50,20 @@ export const Runner: FC<Props> = props => {
     return () => setNode(undefined)
   }, [editor])
 
+  useEffect(() => {
+    if (editor) {
+      window.addEventListener('save', handleClick)
+      return () => {
+        window.removeEventListener('save', handleClick)
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editor])
+
   return (
-    <div className="runner" title="ctrl/cmd - enter">
+    <div className="runner">
       <span className="operation-name">{node ? node.name?.value ?? 'query' : '无操作'}</span>
-      <IconBtn id="icon-send" disabled={!node} onClick={handleClick} size={14} />
+      <IconBtn title="ctrl/cmd - s" id="icon-send" disabled={!node} onClick={handleClick} size={14} />
     </div>
   )
 }

@@ -11,7 +11,7 @@
   display: inline-flex;
   align-items: center;
   font-size: calc(var(--fc-unit-size) * 12);
-  grid-gap: calc(var(--fc-unit-size) * 18);
+  grid-gap: calc(var(--fc-unit-size) * 10);
 }
 
 .status-bar .status-bar-selector {

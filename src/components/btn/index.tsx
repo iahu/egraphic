@@ -8,6 +8,7 @@ export interface Props {
   title?: string
   ghost?: boolean
   onClick?: (event: React.MouseEvent) => void
+  onClickCapture?: (event: React.MouseEvent) => void
   slot?: string
   [key: `data-${string}`]: string | number
 }

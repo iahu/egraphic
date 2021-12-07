@@ -199,22 +199,20 @@ export const Panel: FC<Props> = props => {
       {header && (
         <div className="panel-header" tabIndex={Number(!!minimizeBtn) - 1} ref={headerRef}>
           <div className="panel-header-left" onClick={onClick}>
-            {closeBtn && <IconBtn border circle className="close-btn" id="icon-close" onClick={onClose} />}
+            {closeBtn && <IconBtn circle className="window-btn close-btn" id="icon-close" onClick={onClose} />}
             {minimizeBtn && (
               <IconBtn
-                border
                 circle
                 disabled={maximize}
-                className="minimize-btn"
+                className="window-btn minimize-btn"
                 id={folded ? 'icon-chevron_down' : 'icon-chevron_up'}
                 onClick={handleMinimize}
               />
             )}
             {maximizeBtn && (
               <IconBtn
-                border
                 circle
-                className="maximize-btn"
+                className="window-btn maximize-btn"
                 id={maximize ? 'icon-remove' : 'icon-add'}
                 onClick={handleMaximize}
               />

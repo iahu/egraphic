@@ -1,65 +1,8 @@
 .sidebar {
-  box-sizing: border-box;
-  height: 100vh;
-  min-width: 40px;
-  width: 200px;
-  flex-shrink: 0;
-  overflow: auto;
-  background: var(--background);
+  position: relative;
+  z-index: 999;
 }
-
-.sidebar .action-bar {
-  display: inline-flex;
-  align-items: center;
-  grid-gap: calc(var(--fc-unit-size) * 6);
-}
-
-.sidebar .item-editor:defined {
-  --padding-l: 0;
-  --padding-r: 0;
-}
-
-.sidebar .item-editor-input {
-  width: 100%;
-  /* 原地不动，注释掉则会往后遁一下 */
-  /*--padding-l: calc(var(--fc-unit-size) * 5);*/
-  --padding-t: calc(var(--fc-unit-size) * 0);
-  --padding-b: calc(var(--fc-unit-size) * 1);
-  --control-min-width: auto;
-  width: calc(100% - 1px);
-}
-
-.sidebar-tree-item::part(collapse-button),
-.sidebar-tree-item::part(expand-button) {
-  --font-size: calc(var(--fc-unit-size) * 10);
-}
-
-.sidebar-tree-item[aria-selected='false'] {
-  user-select: none;
-}
-
-.sidebar-item {
-  display: flex;
-  width: 100%;
-  align-items: center;
-}
-
-.sidebar-file-type-icon {
-  margin-right: calc(var(--fc-unit-size) * 3);
-}
-.sidebar-actions {
-  display: none;
-  align-self: center;
-  align-items: center;
-  grid-gap: calc(var(--fc-unit-size) * 4);
-  margin-left: auto;
-}
-
-.sidebar-item:hover .sidebar-actions {
-  display: inline-flex;
-}
-
-.sidebar .input-type-icon {
-  display: inline-flex;
-  align-items: center;
+.sidebar,
+.sidebar .panel-body {
+  overflow: visible;
 }

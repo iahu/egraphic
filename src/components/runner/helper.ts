@@ -1,4 +1,4 @@
-import { ObjectType } from '@state/'
+import { ObjectType } from '@state'
 import * as graphql from 'graphql'
 import * as monaco from 'monaco-editor'
 import { api as GraphQLAPI } from 'monaco-graphql'
@@ -11,7 +11,7 @@ export const getSchema = () =>
       } else if ('__schema' in schema) {
         return graphql.buildClientSchema(schema)
       }
-      return graphql.buildASTSchema(schema)
+      return Promise.reject(new Error('cant find schema'))
     }
     return Promise.reject(new Error('cant find schema'))
   })
@@ -101,10 +101,16 @@ export const getOperationNode = (
 ): graphql.OperationDefinitionNode | undefined => {
   const line = lineNumber ?? editor.getPosition()?.lineNumber ?? -1
   const source = editor.getValue()
-  const { definitions } = graphql.parse(source)
-  const containsLine = lineInNode.bind(null, line)
+  if (!source) return
+  try {
+    const { definitions } = graphql.parse(source)
+    const containsLine = lineInNode.bind(null, line)
 
-  return definitions.filter(isOprationNode).filter(containsLine).pop()
+    return definitions.filter(isOprationNode).filter(containsLine).pop()
+  } catch (error) {
+    // console.error(error)
+    return
+  }
 }
 
 export const getNodeRange = (node?: graphql.DefinitionNode) => {

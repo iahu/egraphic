@@ -56,8 +56,9 @@
   align-items: center;
 }
 
-.panel-header-left .icon-btn {
-  opacity: 0.75;
+.panel-header-left .window-btn {
+  /*opacity: 0.75;*/
+  background: var(--background-hover);
 }
 .panel-header-left .icon-btn.close-btn:hover {
   background: #fc4546;

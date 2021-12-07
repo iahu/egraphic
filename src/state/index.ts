@@ -1,5 +1,6 @@
 import * as monaco from 'monaco-editor'
 import { getItem, setItem } from '@helper/use-storage'
+import { findFile } from '@helper'
 
 export type ObjectType<T = unknown> = Record<string | number, T>
 export type Status = 'ok' | 'error' | 'pending'
@@ -17,8 +18,8 @@ export interface FileType extends QueryFile {
   // file content
   content: {
     query: string
-    variable: ''
-    response: ''
+    variable: string
+    response: string
   }
 }
 
@@ -30,6 +31,11 @@ export interface FolderType extends QueryFile {
 export type FileSet = FileType | FolderType
 
 export type FileSetList = FileSet[]
+
+export type OpenedFile = {
+  id: string
+  name: string
+}
 
 export const initState = {
   // inner global variable
@@ -59,6 +65,7 @@ export const initState = {
   formatOnBlur: getItem('editor.formatOnBlur', true),
 
   fileList: getItem<FileSetList>('editor.fileList', []),
+  openedFileList: getItem<OpenedFile[]>('editor.openedFileList', []),
 }
 
 export type State = typeof initState
@@ -81,6 +88,8 @@ export type Action =
   | { type: 'tabSize'; payload: number }
   | { type: 'formatOnBlur'; payload: boolean }
   | { type: 'fileList'; payload: FileSetList }
+  | { type: 'openedFileList'; payload: OpenedFile[] }
+  | { type: 'swapFile'; payload: FileType }
 
 const reducer = (state: State, action: Action): State => {
   /**
@@ -138,10 +147,41 @@ const reducer = (state: State, action: Action): State => {
       setItem('query.operationName', action.payload)
       return { ...state, operationName: action.payload }
 
+    // file
     case 'fileList':
       setItem('editor.fileList', action.payload)
       return { ...state, fileList: action.payload }
+    case 'openedFileList':
+      setItem('editor.openedFileList', action.payload)
+      return { ...state, openedFileList: action.payload }
+    case 'swapFile': {
+      const { payload } = action
+      const { id, name } = payload
+      const { fileList, openedFileList, query, variable, response } = state
+      const selectedFile = findFile(fileList, id)
+      const openedFile = findFile(fileList, openedFileList[0]?.id)
+      const bufferedContent = { query, variable, response }
 
+      if (openedFile) {
+        // save buffer as file content
+        openedFile.content = bufferedContent
+        openedFile.lastModified = Date.now()
+        setItem('editor.fileList', state.fileList)
+        state = { ...state, fileList: [...fileList] }
+      }
+
+      if (selectedFile) {
+        // set the selected file as buffer
+        const fileContent = { ...selectedFile.content }
+        setItem('editor.openedFileList', [{ id, name }])
+        setItem('egraphic.query', query)
+        setItem('egraphic.variable', variable)
+        setItem('egraphic.response', response)
+        state = { ...state, openedFileList: [{ id, name }], ...fileContent }
+      }
+
+      return state
+    }
     default:
       return state
   }

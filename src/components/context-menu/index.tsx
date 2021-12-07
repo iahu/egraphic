@@ -22,7 +22,7 @@ export interface Props {
   container?: HTMLElement | null
   dataSource?: MenuItem[]
   children?: React.ReactElement
-  onClick?: (id: string) => void
+  onClick?: (id: string, event: React.MouseEvent) => void
   /** disabled id list */
   disabled?: string[]
 }
@@ -48,7 +48,7 @@ export const ContextMenu: FC<Props> = props => {
   }
   const handleClick = (e: React.MouseEvent) => {
     if (e.currentTarget instanceof HTMLElement) {
-      onClick?.(e.currentTarget.dataset.id ?? '')
+      onClick?.(e.currentTarget.dataset.id ?? '', e)
     }
   }
 
@@ -90,7 +90,7 @@ export const ContextMenu: FC<Props> = props => {
   return (
     <>
       {childrenClone}
-      {position && container ? createPortal(menu, container) : menu}
+      {position && container ? createPortal(menu, container) : null}
     </>
   )
 }

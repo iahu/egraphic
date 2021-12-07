@@ -134,7 +134,7 @@ export const useEditor = (container: string, config?: monaco.editor.IStandaloneE
      * 所以只接收初始值，后面的值由 monaco 自己维护
      * 如果有更新的需要，可以在外部通过 `setValue` 更新
      */
-    if (editor && !editor.getValue()) {
+    if (editor && !editor.hasTextFocus()) {
       editor.setValue(value)
       setPosition()
     }
@@ -173,6 +173,7 @@ export const useEditor = (container: string, config?: monaco.editor.IStandaloneE
   useEffect(() => {
     editor?.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, () => {
       console.log('fake save success!')
+      window.dispatchEvent(new CustomEvent('save'))
     })
   }, [editor])
 
