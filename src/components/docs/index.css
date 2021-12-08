@@ -28,18 +28,6 @@
   box-sizing: border-box;
 }
 
-.docs-body::-webkit-scrollbar {
-  width: 8px;
-  height: 0;
-  cursor: auto;
-}
-.docs-body::-webkit-scrollbar-thumb {
-  background: rgba(225, 225, 225, 0.4);
-}
-.docs-body:hover::-webkit-scrollbar-thumb {
-  background: rgba(225, 225, 225, 0.8);
-}
-
 .line {
   line-height: 1.5;
   display: block;

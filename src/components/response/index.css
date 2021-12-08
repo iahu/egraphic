@@ -9,7 +9,7 @@
 }
 
 .response-container .overflow-guard {
-  filter: sepia(30%);
+  filter: brightness(0.98);
 }
 
 .operation-name {

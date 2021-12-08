@@ -2,8 +2,10 @@
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
-  padding: var(--padding);
+  padding: calc(var(--fc-unit-size) * 2) var(--padding-l);
+  background: var(--box-background);
   border-top: var(--border-width) solid var(--border-color);
+  z-index: 1;
 }
 
 .status-bar-left,

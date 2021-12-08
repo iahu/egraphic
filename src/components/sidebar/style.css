@@ -2,6 +2,11 @@
   position: relative;
   z-index: 999;
 }
+
+.sidebar .panel-header {
+  background: var(--background);
+}
+
 .sidebar,
 .sidebar .panel-body {
   overflow: visible;

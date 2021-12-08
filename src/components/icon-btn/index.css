@@ -5,9 +5,10 @@
   min-width: initial;
   min-height: initial;
 }
-
 .icon-btn.btn:hover {
   opacity: 1;
+}
+.icon-btn.btn:not(.ghost):hover {
   background: var(--accent-color-hover);
 }
 

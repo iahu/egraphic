@@ -10,7 +10,7 @@ import {
   GraphQLObjectType,
   GraphQLSchema,
 } from 'graphql'
-import React, { FC, useContext, useEffect, useState } from 'react'
+import React, { createContext, FC, useContext, useEffect, useState } from 'react'
 import { HistoryBar } from './history-bar'
 import './index.css'
 
@@ -18,11 +18,17 @@ export interface Props {
   width?: number | string
 }
 
+const NavigateContext = createContext({
+  back: [] as string[],
+  forward: [] as string[],
+})
+
 export const Docs: FC<Props> = props => {
   const { width } = props
   const { dispatch } = useContext(AppCtx)
   const [schema, setSchema] = useState<GraphQLSchema>()
   const [fieldType, setFieldType] = useState('')
+  const [backStack, setBackStack] = useState<string[]>([])
   useEffect(() => {
     const handleHashChange = () => {
       setFieldType(location.hash.slice(1))
@@ -45,6 +51,7 @@ export const Docs: FC<Props> = props => {
     const type = target.dataset.type
     if (type) {
       setFieldType(type)
+      setBackStack(backStack.concat(type))
     }
   }
 
@@ -144,7 +151,11 @@ export const Docs: FC<Props> = props => {
       closeBtn
       maximizeBtn
       onClose={handleClick}
-      headerRight={<HistoryBar />}
+      headerRight={
+        <NavigateContext.Provider value={{ back: backStack, forward: [] }}>
+          <HistoryBar />
+        </NavigateContext.Provider>
+      }
       width={width}
       resizable={{ e: true }}
       onResize={onResize}

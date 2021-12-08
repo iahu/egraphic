@@ -1,0 +1,68 @@
+.file-browser {
+  box-sizing: border-box;
+  height: 100vh;
+  min-width: 40px;
+  width: 200px;
+  flex-shrink: 0;
+  overflow: auto;
+  background: var(--background);
+}
+
+.file-browser .action-bar {
+  display: inline-flex;
+  align-items: center;
+  grid-gap: calc(var(--fc-unit-size) * 6);
+}
+
+.file-browser .item-editor:defined {
+  --padding-l: 0;
+  --padding-r: 0;
+}
+
+.file-browser .item-editor-input:defined {
+  width: 100%;
+  --padding-l: calc(var(--fc-unit-size) * 0);
+  --padding-t: calc(var(--fc-unit-size) * 0);
+  --padding-b: calc(var(--fc-unit-size) * 1);
+  --control-min-width: auto;
+  margin-left: calc(-1 * var(--border-width));
+  z-index: 999;
+}
+
+.file-browser-tree-item::part(control) {
+  --padding-l: calc(var(--fc-unit-size) * 3);
+}
+.file-browser-tree-item::part(collapse-button),
+.file-browser-tree-item::part(expand-button) {
+  --font-size: calc(var(--fc-unit-size) * 10);
+}
+
+.file-browser-tree-item[aria-selected='false'] {
+  user-select: none;
+}
+
+.file-browser-item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.file-browser-file-type-icon {
+  margin-right: calc(var(--fc-unit-size) * 3);
+}
+.file-browser-actions {
+  display: none;
+  align-self: center;
+  align-items: center;
+  grid-gap: calc(var(--fc-unit-size) * 4);
+  margin-left: auto;
+}
+
+.file-browser-item:hover .file-browser-actions {
+  display: inline-flex;
+}
+
+.file-browser .input-type-icon {
+  display: inline-flex;
+  align-items: center;
+}

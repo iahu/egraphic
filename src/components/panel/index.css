@@ -56,7 +56,7 @@
   align-items: center;
 }
 
-.panel-header-left .window-btn {
+.panel-header-left .frame-btn {
   /*opacity: 0.75;*/
   background: var(--background-hover);
 }

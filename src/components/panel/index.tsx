@@ -1,6 +1,6 @@
-import { IconBtn } from '@components/icon-btn'
 import classnames from 'classnames'
 import React, { CSSProperties, FC, useEffect, useRef, useState } from 'react'
+import { FrameBtn } from './frame-btn'
 import './index.css'
 import { Resizeable, useDraggable, useResize, Vector } from './use-dng'
 
@@ -199,23 +199,17 @@ export const Panel: FC<Props> = props => {
       {header && (
         <div className="panel-header" tabIndex={Number(!!minimizeBtn) - 1} ref={headerRef}>
           <div className="panel-header-left" onClick={onClick}>
-            {closeBtn && <IconBtn circle className="window-btn close-btn" id="icon-close" onClick={onClose} />}
+            {closeBtn && <FrameBtn className="close-btn" id="icon-close" onClick={onClose} />}
             {minimizeBtn && (
-              <IconBtn
-                circle
+              <FrameBtn
                 disabled={maximize}
-                className="window-btn minimize-btn"
+                className="minimize-btn"
                 id={folded ? 'icon-chevron_down' : 'icon-chevron_up'}
                 onClick={handleMinimize}
               />
             )}
             {maximizeBtn && (
-              <IconBtn
-                circle
-                className="window-btn maximize-btn"
-                id={maximize ? 'icon-remove' : 'icon-add'}
-                onClick={handleMaximize}
-              />
+              <FrameBtn className="maximize-btn" id={maximize ? 'icon-remove' : 'icon-add'} onClick={handleMaximize} />
             )}
             {name && <span className="panel-header-name">{name}</span>}
           </div>

@@ -6,11 +6,12 @@ import React, { FC, useContext } from 'react'
 import './style.css'
 
 export interface Props extends Omit<PanelProps, 'resizable' | 'onClick'> {
-  onClick?: (file: FileSet) => void
+  width?: number | string
 }
 
 const onResize = () => window.dispatchEvent(new UIEvent('resize'))
-export const Sidebar: FC<Props> = () => {
+export const Sidebar: FC<Props> = props => {
+  const { width } = props
   const {
     state: { sidebarVisable },
   } = useContext(AppCtx)
@@ -20,7 +21,7 @@ export const Sidebar: FC<Props> = () => {
       hidden={!sidebarVisable}
       resizable={{ e: true }}
       header={false}
-      width="260px"
+      width={width}
       className="sidebar"
       onResize={onResize}
     >

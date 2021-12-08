@@ -103,7 +103,7 @@ export const useEditor = (container: string, config?: monaco.editor.IStandaloneE
       trimAutoWhitespace: true,
       lineDecorationsWidth: 1,
       renderLineHighlight: 'none',
-      lineNumbersMinChars: 4,
+      lineNumbersMinChars: 3,
       scrollBeyondLastColumn: 0,
       scrollBeyondLastLine: false,
       scrollbar: {

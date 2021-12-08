@@ -28,7 +28,7 @@ export const Variable: FC = () => {
     <Panel
       name="变量"
       width="auto"
-      height="100px"
+      height="120px"
       minimize={!state.variableVisable}
       className="variable"
       closeBtn
