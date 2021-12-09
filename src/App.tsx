@@ -1,4 +1,5 @@
 import { Docs } from '@components/docs'
+import { FileBrowser } from '@components/file-browser'
 import { Icon } from '@components/icon'
 import { PanelGroup } from '@components/panel-group'
 import { Query } from '@components/query'
@@ -42,7 +43,7 @@ function App() {
     <AppCtxProvider value={{ state, dispatch }}>
       <div id="app">
         <div className="main">
-          <Sidebar width="240px" />
+          <FileBrowser width="240px" />
 
           {docsVisable && <Docs width="360px" />}
 

@@ -1,6 +1,6 @@
 import { IconBtn } from '@components/icon-btn'
 import { Panel, Props as PanelProps } from '@components/panel'
-import { createFile, createFolder } from '@helper/index'
+import { createFile, createFolder, fireResizeEvent } from '@helper/index'
 import { AppCtx } from '@state/app-ctx'
 import { FileSet } from '@state/index'
 import React, { FC, useContext, useEffect, useState } from 'react'
@@ -12,12 +12,12 @@ const isCreateType = (type: string): type is FileSet['type'] => {
   return ['file', 'folder'].includes(type)
 }
 
-export interface Props extends Omit<PanelProps, 'resizable' | 'onClick'> {
+export interface Props extends Omit<PanelProps, 'onClick'> {
   onClick?: (file: FileSet) => void
 }
 
 export const FileBrowser: FC<Props> = props => {
-  const { onClick } = props
+  const { width, onClick, ...others } = props
   const {
     dispatch,
     state: { fileList, sidebarVisable },
@@ -58,11 +58,20 @@ export const FileBrowser: FC<Props> = props => {
 
   return (
     <Panel
+      width={width}
+      resizable={{ e: true }}
+      onResize={fireResizeEvent}
+      {...others}
       className="file-browser"
       name={
         <div className="action-bar">
-          <IconBtn data-type="file" id="icon-file" title="Create New Query" onClick={handleClickCreatBtn} />
-          <IconBtn data-type="folder" id="icon-folder" title="Create Query Folder" onClick={handleClickCreatBtn} />
+          <IconBtn data-type="file" id="icon-file" title="Create New Query" onClickCapture={handleClickCreatBtn} />
+          <IconBtn
+            data-type="folder"
+            id="icon-folder"
+            title="Create Query Folder"
+            onClickCapture={handleClickCreatBtn}
+          />
         </div>
       }
       hidden={!sidebarVisable}

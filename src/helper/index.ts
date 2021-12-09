@@ -18,7 +18,7 @@ export const createFile = (name: string): FileType => {
     type: 'file',
     createTime: now,
     lastModified: now,
-    content: { query: '', variable: '', response: '' },
+    content: { query: 'query {\n  \n}', variable: '{}', response: '' },
   }
 }
 

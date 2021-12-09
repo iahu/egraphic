@@ -9,3 +9,8 @@
   width: 100%;
   height: 100%;
 }
+
+.switcher {
+  display: flex;
+  grid-gap: calc(var(--fc-unit-size) * 6);
+}

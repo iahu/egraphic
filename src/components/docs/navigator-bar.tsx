@@ -1,7 +1,7 @@
 import { IconBtn } from '@components/icon-btn'
 import React, { FC, useEffect, useState } from 'react'
 
-export const HistoryBar: FC = () => {
+export const NavigatorBar: FC = () => {
   const [hash, setHash] = useState('')
   const [stack, setStack] = useState(0)
 

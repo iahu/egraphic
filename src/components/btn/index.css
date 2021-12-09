@@ -7,8 +7,9 @@
   justify-content: center;
   align-items: center;
   font: inherit;
+  font-weight: normal;
   cursor: pointer;
-  background: var(--accent-color);
+  background: var(--background);
   color: var(--foreground);
   /*border-radius: 2px;*/
   line-height: 1;
@@ -16,14 +17,22 @@
   transition: all 0.2s;
 }
 
-.btn:hover {
+.btn.selected {
+  font-weight: bold;
+  color: var(--foreground-selected);
+  background: var(--background-color-selected);
+}
+
+.btn:not(:disabled):hover {
   opacity: 0.8;
   color: var(--foreground-hover);
 }
 .btn:not(.ghost):hover {
   background: var(--accent-color-hover);
 }
-
+.btn[readonly] {
+  cursor: default;
+}
 .btn:disabled {
   color: var(--foreground-disabled);
   background: var(--accent-color-disabled);

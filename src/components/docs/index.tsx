@@ -1,4 +1,3 @@
-import { Icon } from '@components/icon'
 import { Panel } from '@components/panel'
 import { getSchema } from '@components/runner/helper'
 import { fireResizeEvent } from '@helper'
@@ -11,7 +10,7 @@ import {
   GraphQLSchema,
 } from 'graphql'
 import React, { createContext, FC, useContext, useEffect, useState } from 'react'
-import { HistoryBar } from './history-bar'
+import { NavigatorBar } from './navigator-bar'
 import './index.css'
 
 export interface Props {
@@ -153,14 +152,14 @@ export const Docs: FC<Props> = props => {
       onClose={handleClick}
       headerRight={
         <NavigateContext.Provider value={{ back: backStack, forward: [] }}>
-          <HistoryBar />
+          <NavigatorBar />
         </NavigateContext.Provider>
       }
       width={width}
       resizable={{ e: true }}
       onResize={onResize}
     >
-      <ul className="docs-body">{docs ? docs : <Icon id="icon-loader" />}</ul>
+      <ul className="docs-body">{docs}</ul>
     </Panel>
   )
 }

@@ -22,12 +22,7 @@ window.MonacoEnvironment = {
   },
 }
 
-monaco.editor.defineTheme('egert', {
-  base: 'vs',
-  inherit: true,
-  rules: [],
-  colors: {},
-})
+const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
 
 const registerJSONFormatProvider = () => {
   monaco.languages.registerDocumentFormattingEditProvider('json', {
@@ -97,7 +92,7 @@ export const useEditor = (container: string, config?: monaco.editor.IStandaloneE
       formatOnPaste: true,
       formatOnType: true,
       folding: true,
-      theme: 'egert',
+      theme: 'vs',
       tabSize,
       parameterHints: { enabled: true, cycle: true },
       trimAutoWhitespace: true,
@@ -174,6 +169,16 @@ export const useEditor = (container: string, config?: monaco.editor.IStandaloneE
     editor?.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, () => {
       console.log('fake save success!')
       window.dispatchEvent(new CustomEvent('save'))
+    })
+  }, [editor])
+
+  useEffect(() => {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+      if (e.matches) {
+        editor?.updateOptions({ theme: 'vs-dark' })
+      } else {
+        editor?.updateOptions({ theme: 'vs' })
+      }
     })
   }, [editor])
 

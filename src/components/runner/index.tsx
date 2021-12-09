@@ -29,7 +29,7 @@ export const Runner: FC<Props> = props => {
     dispatch({ type: 'responseStatus', payload: 'pending' })
     dispatch({ type: 'operationName', payload: op.name?.value ?? '' })
     variableValues
-      .then(variableValues => request(state.schemaUrl, query, variableValues, headers))
+      .then(variableValues => request(state.schemaUrl, query, variableValues, JSON.parse(headers.trim())))
       .then(response => {
         dispatch({ type: 'response', payload: stringify(response) })
         dispatch({ type: 'responseStatus', payload: 'ok' })

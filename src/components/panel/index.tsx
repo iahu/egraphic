@@ -204,7 +204,7 @@ export const Panel: FC<Props> = props => {
               <FrameBtn
                 disabled={maximize}
                 className="minimize-btn"
-                id={folded ? 'icon-chevron_down' : 'icon-chevron_up'}
+                id={folded ? 'icon-chevron_up' : 'icon-chevron_down'}
                 onClick={handleMinimize}
               />
             )}

@@ -1,5 +1,6 @@
 .context-menu:defined {
   position: fixed;
+  z-index: 9999;
   --padding-t: calc(var(--fc-unit-size) * 6);
   --padding-b: calc(var(--fc-unit-size) * 6);
   --padding-l: calc(var(--fc-unit-size) * 4);

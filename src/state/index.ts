@@ -53,9 +53,7 @@ export const initState = {
   // query
   rootValue: getItem('query.rootValue', {}),
   contextValue: getItem('query.contextValue', {}),
-  headers: getItem('query.headers', {
-    userid: '1',
-  }) as ObjectType,
+  headers: getItem<string>('query.headers', '{userid: "1", }'),
   operationName: getItem('query.operationName', ''),
   response: getItem('query.response', ''),
   responseStatus: getItem('query.responseStatus', '' as Status),
@@ -81,7 +79,7 @@ export type Action =
   | { type: 'variableVisable'; payload: boolean }
   | { type: 'rootValue'; payload: ObjectType }
   | { type: 'contextValue'; payload: ObjectType }
-  | { type: 'headers'; payload: ObjectType }
+  | { type: 'headers'; payload: string }
   | { type: 'response'; payload: any }
   | { type: 'responseStatus'; payload: Status }
   | { type: 'operationName'; payload: string }

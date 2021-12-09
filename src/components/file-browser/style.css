@@ -1,4 +1,4 @@
-.file-browser {
+.file-browser:defined {
   box-sizing: border-box;
   height: 100vh;
   min-width: 40px;
@@ -6,6 +6,9 @@
   flex-shrink: 0;
   overflow: auto;
   background: var(--background);
+}
+.file-browser .panel-header {
+  background: none;
 }
 
 .file-browser .action-bar {
