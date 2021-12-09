@@ -46,7 +46,7 @@ export const initState = {
   query: getItem('egraphic.query', 'query {\n  \n}'),
   variable: getItem('egraphic.variable', '{}'),
   docsVisable: getItem('egraphic.docsVisable', false),
-  sidebarVisable: getItem('egraphic.sidebarVisable', false),
+  sidebarVisable: getItem('egraphic.sidebarVisable', true),
   variableVisable: getItem('egraphic.variableValues', false),
   view: getItem('egraphic.view', 'queryView' as ViewType),
 

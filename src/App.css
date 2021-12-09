@@ -110,7 +110,7 @@ code {
     position: fixed;
     top: 0;
     left: calc(var(--offset));
-    width: 30vw;
+    width: 24vw;
     height: 100vh;
 
     content: 'Egraphic';
@@ -119,8 +119,9 @@ code {
     text-indent: 12px;
     height: var(--offset);
     line-height: var(--offset);
-    background: rgba(0, 0, 0, 0.6);
-    color: #999;
+    background: var(--foreground);
+    color: var(--background);
+    opacity: 0.9;
   }
 
   body:after {
@@ -179,6 +180,13 @@ code {
 
 .main {
   display: flex;
+  background: var(--box-background);
+}
+
+.not-open-file-tips {
+  display: flex;
+  margin: auto;
+  font-size: 24px;
 }
 
 .query-editor-group {

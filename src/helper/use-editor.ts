@@ -92,7 +92,7 @@ export const useEditor = (container: string, config?: monaco.editor.IStandaloneE
       formatOnPaste: true,
       formatOnType: true,
       folding: true,
-      theme: 'vs',
+      theme: isDarkMode ? 'vs-dark' : 'vs',
       tabSize,
       parameterHints: { enabled: true, cycle: true },
       trimAutoWhitespace: true,

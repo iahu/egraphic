@@ -28,37 +28,34 @@ function App() {
     onResize()
   }, [state.docsVisable, state.variableVisable])
 
-  if (!openedFileList?.length) {
-    return (
-      <div className="query-view">
-        <div className="not-open-file-tips">
-          <Icon id="icon-mood-happy" />
-          <p>点击左侧导航栏，打开文件进行编辑</p>
-        </div>
-      </div>
-    )
-  }
-
   return (
     <AppCtxProvider value={{ state, dispatch }}>
       <div id="app">
         <div className="main">
           <FileBrowser width="240px" />
 
-          {docsVisable && <Docs width="360px" />}
+          {!openedFileList?.length ? (
+            <div className="not-open-file-tips">
+              <Icon id="icon-mood-happy" />
+              <p>点击左侧导航栏，打开文件进行编辑</p>
+            </div>
+          ) : (
+            <>
+              {docsVisable && <Docs width="360px" />}
+              <PanelGroup
+                className="query-editor-group"
+                width={`calc((100% - ${offset}px) * 0.46)`}
+                height="100%"
+                resizable={{ e: true }}
+                onResize={onResize}
+              >
+                <Query />
+                <Variable />
+              </PanelGroup>
 
-          <PanelGroup
-            className="query-editor-group"
-            width={`calc((100% - ${offset}px) * 0.46)`}
-            height="100%"
-            resizable={{ e: true }}
-            onResize={onResize}
-          >
-            <Query />
-            <Variable />
-          </PanelGroup>
-
-          <Response width={`calc((100% - ${offset}px) * 0.54)`} />
+              <Response width={`calc((100% - ${offset}px) * 0.54)`} />
+            </>
+          )}
         </div>
         <StatusBar />
       </div>
