@@ -8,6 +8,11 @@
   overflow: hidden;
   filter: hue-rotate(120deg);
 }
+@media (prefers-color-scheme: dark) {
+  .docs {
+    filter: hue-rotate(120deg) brightness(1.4);
+  }
+}
 
 .docs.maximize {
   z-index: 999;

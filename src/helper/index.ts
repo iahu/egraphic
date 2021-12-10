@@ -59,3 +59,9 @@ export const filterFileList = (fileSetList: FileSetList, id: string): FileSetLis
     return file.id !== id
   })
 }
+
+export const isNull = (d: unknown): d is null => d === null
+export const isString = (d: unknown): d is string => typeof d === 'string'
+export const isArray = (d: unknown): d is any[] => Array.isArray(d)
+export const isObject = (d: unknown): d is Record<any, any> =>
+  Object.prototype.toString.call(d).slice(8, -1) === 'Object'

@@ -1,30 +1,33 @@
 import { Panel } from '@components/panel'
-import { Status } from '@components/status'
-import { useEditor } from '@helper/use-editor'
+import { FCSelect } from '@egret/fusion-components'
+import { replacer } from '@helper/stringify'
 import { AppCtx } from '@state/app-ctx'
-import React, { FC, useContext, useEffect } from 'react'
+import React, { FC, useContext, useState } from 'react'
 import './index.css'
+import { JSONView } from './json-view'
+import { TableView } from './table-view'
 
 export interface Props {
   width?: string | number
 }
 
+const views = [
+  { name: 'JSON', id: 'json', icon: 'icon-json' },
+  { name: 'Table', id: 'table', icon: 'icon-grid' },
+  { name: 'Raw', id: 'raw', icon: 'icon-grid' },
+]
+
 export const Response: FC<Props> = props => {
   const { width } = props
+  const [view, setView] = useState('json')
   const { state } = useContext(AppCtx)
-  const { response, responseStatus, operationName } = state
-  const editor = useEditor('.response-container', {
-    language: 'json',
-    readOnly: true,
-    lineNumbers: 'off',
-  })
-
-  useEffect(() => {
-    if (editor) {
-      // parseJSON(response).then(() => editor.setValue(response))
-      editor.setValue(response || '"提示：发送 Graphql 请求以查看结果"')
+  const { response, responseStatus } = state
+  const handleChange = (e: React.FormEvent<FCSelect>) => {
+    const { target } = e
+    if (target instanceof FCSelect) {
+      setView(target.value)
     }
-  }, [editor, response])
+  }
 
   return (
     <Panel
@@ -34,14 +37,22 @@ export const Response: FC<Props> = props => {
       maximizeBtn
       border={false}
       headerRight={
-        <Status className="operation-name" status={responseStatus}>
-          {!!response && operationName}
-        </Status>
+        <fc-select class="view-select" value={view} onChange={handleChange}>
+          {views.map(v => (
+            <fc-list-option key={v.id} value={v.id}>
+              {v.name}
+            </fc-list-option>
+          ))}
+        </fc-select>
       }
       data-status={responseStatus}
       width={width}
     >
-      <div className="response-container"></div>
+      {view === 'json' && <JSONView dataSource={response} />}
+      {view === 'table' && <TableView dataSource={response} />}
+      {view === 'raw' && (
+        <pre className="response-container">{JSON.stringify(JSON.parse(response), (k, v) => replacer(v), 0)}</pre>
+      )}
     </Panel>
   )
 }

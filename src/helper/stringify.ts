@@ -9,3 +9,21 @@ function stringify(
 }
 
 export default stringify
+
+/**
+ * 显示将不可渲染的值转成对应字符串
+ */
+export const replacer = (value: any) => {
+  const type = Object.prototype.toString.call(value).slice(8, -1)
+  switch (type) {
+    case 'string':
+      return value || '-'
+    case 'Undefined':
+    case 'Null':
+      return type.toLowerCase()
+    case 'Number':
+      return isNaN(value) ? 'NaN' : value
+    default:
+      return value
+  }
+}

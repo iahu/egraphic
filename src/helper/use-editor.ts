@@ -61,8 +61,12 @@ monaco.languages.onLanguage(LANGUAGE_ID, registerGraphQLFormatProvider)
 
 /**
  * monaco eidtor 的 hook
- * 注意：monaco 并不支持在一个页面上的多个编辑器使用不同的主题
- * @type monaco.editor.IStandaloneCodeEditor
+ *
+ * 注意：
+ *
+ * 1. monaco 并不支持在一个页面上的多个编辑器使用不同的主题
+ *
+ * 2. 有需要时，请在外面使用 `editor.setValue` 更新 editor 内容
  */
 export const useEditor = (container: string, config?: monaco.editor.IStandaloneEditorConstructionOptions) => {
   const [editor, setEditor] = useState<monaco.editor.IStandaloneCodeEditor>()
@@ -75,11 +79,6 @@ export const useEditor = (container: string, config?: monaco.editor.IStandaloneE
     [editor],
   )
 
-  /**
-   * 这里希望一个页面中只创建一个 editor 实例，因为
-   * 1. 节省内存
-   * 2. monaco 没有提供解绑事件的方法，rerender 后无法解绑之前的事件
-   */
   useEffect(() => {
     const $container = document.querySelector(container) as HTMLDivElement
     if (!$container) {

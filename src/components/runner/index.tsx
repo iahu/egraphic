@@ -4,7 +4,7 @@ import stringify from '@helper/stringify'
 import { AppCtx } from '@state/app-ctx'
 import * as graphql from 'graphql'
 import * as monaco from 'monaco-editor'
-import React, { FC, useContext, useEffect, useState } from 'react'
+import React, { FC, useCallback, useContext, useEffect, useState } from 'react'
 import { getOperationNode, getQueryString, parseJSON, request } from './helper'
 import './index.css'
 
@@ -17,28 +17,32 @@ export const Runner: FC<Props> = props => {
   const { state, dispatch } = useContext(AppCtx)
   const { variable, headers } = state
   const [node, setNode] = useState<graphql.OperationDefinitionNode>()
-  const handleClick = (e: React.MouseEvent | Event) => {
-    e.preventDefault()
-    if (!editor) return dispatch({ type: 'response', payload: '未找到到可查询内容' })
+  const handleClick = useCallback(
+    (e: React.MouseEvent | Event) => {
+      e.preventDefault()
+      if (!editor) return dispatch({ type: 'response', payload: '未找到到可查询内容' })
 
-    const op = getOperationNode(editor)
-    const query = getQueryString(op)
-    if (!op || !query) return dispatch({ type: 'response', payload: '无匹配的查询操作' })
-    const variableValues = parseJSON<Record<string, any>>(variable).catch(() => ({}))
+      const op = getOperationNode(editor)
+      const query = getQueryString(op)
+      if (!op || !query) return dispatch({ type: 'response', payload: '无匹配的查询操作' })
+      const variableValues = parseJSON<Record<string, any>>(variable).catch(() => ({}))
 
-    dispatch({ type: 'responseStatus', payload: 'pending' })
-    dispatch({ type: 'operationName', payload: op.name?.value ?? '' })
-    variableValues
-      .then(variableValues => request(state.schemaUrl, query, variableValues, JSON.parse(headers.trim())))
-      .then(response => {
-        dispatch({ type: 'response', payload: stringify(response) })
-        dispatch({ type: 'responseStatus', payload: 'ok' })
-      })
-      .catch(err => {
-        dispatch({ type: 'response', payload: JSON.stringify(err, null, 2) })
-        dispatch({ type: 'responseStatus', payload: 'error' })
-      })
-  }
+      dispatch({ type: 'responseStatus', payload: 'pending' })
+      dispatch({ type: 'operationName', payload: op.name?.value ?? '' })
+
+      variableValues
+        .then(variableValues => request(state.schemaUrl, query, variableValues, JSON.parse(headers.trim())))
+        .then(response => {
+          dispatch({ type: 'response', payload: stringify(response) })
+          dispatch({ type: 'responseStatus', payload: 'ok' })
+        })
+        .catch(err => {
+          dispatch({ type: 'response', payload: JSON.stringify(err, null, 2) })
+          dispatch({ type: 'responseStatus', payload: 'error' })
+        })
+    },
+    [dispatch, editor, state.schemaUrl, headers, variable],
+  )
 
   useEffect(() => {
     if (editor) {
@@ -57,8 +61,7 @@ export const Runner: FC<Props> = props => {
         window.removeEventListener('save', handleClick)
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [editor])
+  }, [editor, handleClick])
 
   return (
     <div className="runner">

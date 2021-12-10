@@ -3,12 +3,12 @@
   --body-background: #f1f1f1;
   --box-background: #fff;
   --box-background-disabled: #ddd;
-  --background: rgb(233, 233, 233);
-  --background-hover: #e1e1e1;
+  --background: #e9e9e9;
+  --background-hover: #e6e6e6;
   --background-active: #ccc;
   --background-disabled: #ddd;
-  --background-highlight: rgb(232, 232, 231);
-  --background-selected: #f6f6f6;
+  --background-highlight: #ddd;
+  --background-selected: #e3e3e3;
 
   --foreground: #444;
   --foreground-hover: #000;
@@ -106,7 +106,7 @@ code {
     background-size: var(--bg-size) var(--bg-size);
   }
 
-  body:before {
+  body::before {
     position: fixed;
     top: 0;
     left: calc(var(--offset));
@@ -121,10 +121,11 @@ code {
     line-height: var(--offset);
     background: var(--foreground);
     color: var(--background);
-    opacity: 0.9;
+    /*opacity: 0.9;*/
+    mix-blend-mode: color-burn;
   }
 
-  body:after {
+  body::after {
     content: '=)';
     position: fixed;
     left: calc(var(--offset) * 2);
@@ -133,7 +134,29 @@ code {
     height: var(--offset);
     line-height: var(--offset);
     color: #fff;
+    width: calc(var(--offset) * 2);
+    height: var(--offset);
+    background: red;
+    z-index: -1;
+    text-align: right;
   }
+
+  #root::before {
+    position: fixed;
+    content: 'happy coding';
+    width: var(--offset);
+    height: calc(var(--offset) * 2);
+    border-left: 8px solid #000;
+    color: var(--background);
+    text-align: right;
+    line-height: 1.5;
+    background: var(--foreground);
+    right: 0;
+    top: 50%;
+    z-index: -1;
+    mix-blend-mode: color-burn;
+  }
+
   #app {
     margin: var(--offset);
     width: calc(100vw - var(--offset) * 2);
@@ -174,7 +197,7 @@ code {
   }
 
   #app {
-    opacity: 0.98;
+    opacity: 0.9;
   }
 }
 

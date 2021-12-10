@@ -20,7 +20,8 @@
 .btn.selected {
   font-weight: bold;
   color: var(--foreground-selected);
-  background: var(--background-color-selected);
+  background: var(--background-selected);
+  cursor: default;
 }
 
 .btn:not(:disabled):hover {

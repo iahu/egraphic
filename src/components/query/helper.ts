@@ -13,6 +13,9 @@ export const setGraphqlAPI = () => {
     foldingRanges: true,
     selectionRanges: true,
     completionItems: true,
+    /**
+     * @TODO 自己实现 hover
+     */
     hovers: true,
     documentSymbols: true,
     diagnostics: true,

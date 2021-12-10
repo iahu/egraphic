@@ -6,6 +6,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
+  overflow: auto;
 }
 
 .response-container .overflow-guard {
@@ -14,4 +15,80 @@
 
 .operation-name {
   margin-left: 0.5em;
+}
+
+.btn-group {
+  display: flex;
+  --radius: calc(var(--fc-unit-size) * 4);
+}
+
+.btn-group .icon-btn:first-child {
+  border-radius: var(--radius) 0 0 var(--radius);
+}
+.btn-group .icon-btn:last-child {
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.btn-group .icon-btn {
+  padding: calc(var(--fc-unit-size) * 2) calc(var(--fc-unit-size) * 4);
+}
+
+.table-view {
+  background: var(--box-background);
+  padding: var(--padding);
+}
+
+.table-view table,
+.table-view tr {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.table-view th {
+  background: var(--background);
+}
+
+.table-view th,
+.table-view td {
+  padding: calc(var(--fc-unit-size) * 2);
+  border: var(--border-width) solid var(--border-color);
+  vertical-align: top;
+}
+
+.table-view tr th {
+  vertical-align: middle;
+  padding: calc(var(--fc-unit-size) * 1) calc(var(--fc-unit-size) * 2);
+}
+
+.table-view td table {
+  margin: 1px;
+}
+
+.table-view .hover {
+  background-color: rgba(240, 160, 10, 0.04);
+}
+
+.view-select:defined,
+fc-list-option:defined {
+  --padding-t: calc(var(--fc-unit-size) * 2);
+  --padding-b: calc(var(--fc-unit-size) * 2);
+}
+
+.view-select:defined {
+  --control-min-width: auto;
+  --border-color: none;
+  --outline-color: none;
+}
+
+.view-select:defined::part(listbox) {
+  width: calc(var(--fc-unit-size) * 80);
+  transform: translate(-14px, 0);
+}
+
+.view-select:defined::part(selected-value) {
+  text-align: right;
+  padding-right: 0.5em;
+}
+.view-select:defined::part(icon-indicator) {
+  width: calc(var(--fc-unit-size) * 10);
+  height: calc(var(--fc-unit-size) * 10);
 }
