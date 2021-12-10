@@ -5,6 +5,7 @@ import { AppCtx } from '@state/app-ctx'
 import React, { FC, useContext, useState } from 'react'
 import './index.css'
 import { JSONView } from './json-view'
+import { RawView } from './raw-view'
 import { TableView } from './table-view'
 
 export interface Props {
@@ -50,9 +51,7 @@ export const Response: FC<Props> = props => {
     >
       {view === 'json' && <JSONView dataSource={response} />}
       {view === 'table' && <TableView dataSource={response} />}
-      {view === 'raw' && (
-        <pre className="response-container">{JSON.stringify(JSON.parse(response), (k, v) => replacer(v), 0)}</pre>
-      )}
+      {view === 'raw' && <RawView dataSource={response} />}
     </Panel>
   )
 }

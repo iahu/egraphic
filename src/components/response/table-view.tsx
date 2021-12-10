@@ -1,5 +1,5 @@
 import { isObject } from '@helper'
-import React, { FC } from 'react'
+import React from 'react'
 import { ArrayToTable } from './array-to-table'
 import { ObjToTable } from './obj-to-table'
 
@@ -7,7 +7,7 @@ export interface Props {
   dataSource: string
 }
 
-export const TableView: FC<Props> = props => {
+export const TableView = React.memo<Props>(function TableView(props) {
   const { dataSource } = props
   const data = JSON.parse(dataSource.trim())
 
@@ -33,4 +33,4 @@ export const TableView: FC<Props> = props => {
       )}
     </div>
   )
-}
+})

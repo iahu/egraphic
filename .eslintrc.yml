@@ -32,3 +32,5 @@ rules:
   semi:
     - error
     - never
+  react/prop-types:
+    - off

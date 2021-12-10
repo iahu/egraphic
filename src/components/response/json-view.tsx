@@ -1,11 +1,11 @@
 import { useEditor } from '@helper/use-editor'
-import React, { FC, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 export interface Props {
   dataSource: string
 }
 
-export const JSONView: FC<Props> = props => {
+export const JSONView = React.memo<Props>(function JSONView(props) {
   const { dataSource } = props
   const editor = useEditor('.json-view', {
     language: 'json',
@@ -21,4 +21,4 @@ export const JSONView: FC<Props> = props => {
   }, [editor, dataSource])
 
   return <div className="response-container json-view"></div>
-}
+})

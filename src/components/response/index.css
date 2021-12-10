@@ -34,7 +34,7 @@
 
 .table-view {
   background: var(--box-background);
-  padding: var(--padding);
+  padding: calc(var(--fc-unit-size) * 2);
 }
 
 .table-view table,
