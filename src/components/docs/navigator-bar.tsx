@@ -1,35 +1,24 @@
 import { IconBtn } from '@components/icon-btn'
-import React, { FC, useEffect, useState } from 'react'
+import React, { createContext, FC, useContext } from 'react'
+import MemoryHistory from './memory-history'
+
+export const NavigateContext = createContext({
+  history: new MemoryHistory(),
+})
 
 export const NavigatorBar: FC = () => {
-  const [hash, setHash] = useState('')
-  const [stack, setStack] = useState(0)
-
-  useEffect(() => {
-    const handleChange = () => {
-      setHash(location.hash.slice(1))
-    }
-
-    window.addEventListener('hashchange', handleChange)
-
-    return () => {
-      window.removeEventListener('hashchange', handleChange)
-    }
-  }, [])
-
+  const { history } = useContext(NavigateContext)
   const handleBack = () => {
-    window.history.back()
-    setStack(stack + 1)
+    history.back()
   }
   const handleForward = () => {
-    setStack(stack - 1)
-    window.history.forward()
+    history.forward()
   }
 
   return (
     <div className="docs-history-bar">
-      <IconBtn title="后退" id="icon-arrow_backward" disabled={!hash} onClick={handleBack}></IconBtn>
-      <IconBtn title="前进" id="icon-arrow_forward" disabled={stack <= 0} onClick={handleForward}></IconBtn>
+      <IconBtn title="后退" id="icon-arrow_backward" disabled={!history.history.length} onClick={handleBack}></IconBtn>
+      <IconBtn title="前进" id="icon-arrow_forward" disabled={!history.stack.length} onClick={handleForward}></IconBtn>
     </div>
   )
 }

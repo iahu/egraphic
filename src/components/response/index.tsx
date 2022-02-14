@@ -29,11 +29,13 @@ export const Response: FC<Props> = props => {
       setView(target.value)
     }
   }
+  const handleResize = () => window.dispatchEvent(new UIEvent('resize'))
 
   return (
     <Panel
       className="response"
       name="返回结果"
+      onResize={handleResize}
       closeBtn
       maximizeBtn
       border={false}

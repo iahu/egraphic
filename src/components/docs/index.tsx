@@ -9,31 +9,30 @@ import {
   GraphQLObjectType,
   GraphQLSchema,
 } from 'graphql'
-import React, { createContext, FC, useContext, useEffect, useState } from 'react'
-import { NavigatorBar } from './navigator-bar'
+import React, { FC, useContext, useEffect, useMemo, useState } from 'react'
 import './index.css'
+import MemoryHistory from './memory-history'
+import { NavigateContext, NavigatorBar } from './navigator-bar'
 
 export interface Props {
   width?: number | string
 }
-
-const NavigateContext = createContext({
-  back: [] as string[],
-  forward: [] as string[],
-})
 
 export const Docs: FC<Props> = props => {
   const { width } = props
   const { dispatch } = useContext(AppCtx)
   const [schema, setSchema] = useState<GraphQLSchema>()
   const [fieldType, setFieldType] = useState('')
-  const [backStack, setBackStack] = useState<string[]>([])
+  const history = useMemo(() => new MemoryHistory(), [])
+
   useEffect(() => {
-    const handleHashChange = () => {
-      setFieldType(location.hash.slice(1))
+    const handleHashChange = (e: Event) => {
+      if (e instanceof CustomEvent) {
+        setFieldType(e.detail.newURL)
+      }
     }
-    window.addEventListener('hashchange', handleHashChange)
-    return () => window.removeEventListener('hashchange', handleHashChange)
+    window.addEventListener('stateChange', handleHashChange)
+    return () => window.removeEventListener('stateChange', handleHashChange)
   }, [])
 
   useEffect(() => {
@@ -49,8 +48,7 @@ export const Docs: FC<Props> = props => {
     const target = e.nativeEvent.target as HTMLElement
     const type = target.dataset.type
     if (type) {
-      setFieldType(type)
-      setBackStack(backStack.concat(type))
+      history.pushState(type)
     }
   }
 
@@ -151,7 +149,7 @@ export const Docs: FC<Props> = props => {
       maximizeBtn
       onClose={handleClick}
       headerRight={
-        <NavigateContext.Provider value={{ back: backStack, forward: [] }}>
+        <NavigateContext.Provider value={{ history }}>
           <NavigatorBar />
         </NavigateContext.Provider>
       }

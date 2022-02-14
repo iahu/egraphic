@@ -18,6 +18,13 @@ export const JSONView = React.memo<Props>(function JSONView(props) {
       // parseJSON(response).then(() => editor.setValue(response))
       editor.setValue(dataSource || '"提示：发送 Graphql 请求以查看结果"')
     }
+    const onResize = () => editor?.layout()
+
+    window.addEventListener('resize', onResize)
+
+    return () => {
+      window.removeEventListener('resize', onResize)
+    }
   }, [editor, dataSource])
 
   return <div className="response-container json-view"></div>

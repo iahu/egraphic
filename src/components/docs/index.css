@@ -6,10 +6,13 @@
 .docs {
   position: relative;
   overflow: hidden;
+  cursor: auto;
+}
+.docs .panel-body {
   filter: hue-rotate(120deg);
 }
 @media (prefers-color-scheme: dark) {
-  .docs {
+  .docs .panel-body {
     filter: hue-rotate(120deg) brightness(1.4);
   }
 }
