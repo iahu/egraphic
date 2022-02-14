@@ -22,7 +22,7 @@ export default class MemoryHistory {
 
     const oldURL = this.state
     if (step < 0) {
-      this.stack.push(...this.history.splice(step))
+      this.stack.unshift(...this.history.splice(step))
     } else if (step > 0) {
       this.history.push(...this.stack.splice(0, step))
     }

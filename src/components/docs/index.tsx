@@ -45,6 +45,7 @@ export const Docs: FC<Props> = props => {
   }
 
   const handleLinkClick = (e: React.MouseEvent) => {
+    e.preventDefault()
     const target = e.nativeEvent.target as HTMLElement
     const type = target.dataset.type
     if (type) {
