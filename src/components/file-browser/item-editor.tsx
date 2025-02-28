@@ -1,5 +1,5 @@
 import { Icon } from '@components/icon'
-import { FCInput } from '@egret/fusion-components'
+import { FCInput } from '@i18u/fusion-components'
 import { FileSet, FileSetList } from '@state/index'
 import React, { FC, useEffect, useRef } from 'react'
 

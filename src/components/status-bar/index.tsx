@@ -1,6 +1,6 @@
 import { Btn } from '@components/btn'
 import { IconBtn } from '@components/icon-btn'
-import { FCListBox } from '@egret/fusion-components'
+import { FCListBox } from '@i18u/fusion-components'
 import { AppCtx } from '@state/app-ctx'
 import React, { useContext } from 'react'
 import './style.css'

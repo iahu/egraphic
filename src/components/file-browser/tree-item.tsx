@@ -1,7 +1,7 @@
 import { ContextMenu } from '@components/context-menu'
 import { Icon } from '@components/icon'
 import { IconBtn } from '@components/icon-btn'
-import { FCTreeItem } from '@egret/fusion-components'
+import { FCTreeItem } from '@i18u/fusion-components'
 import { createFile, createFolder, filterFileList } from '@helper'
 import { AppCtx } from '@state/app-ctx'
 import { FileSet } from '@state/index'

@@ -1,6 +1,6 @@
 import { Icon } from '@components/icon'
 import { Vector } from '@components/panel/use-dng'
-import { FCMenu } from '@egret/fusion-components'
+import { FCMenu } from '@i18u/fusion-components'
 import React, { FC, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import './style.css'

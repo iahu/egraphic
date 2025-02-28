@@ -1,1 +1,1 @@
-import '@egret/fusion-components/types/fc-react'
+import '@i18u/fusion-components/types/fc-react'

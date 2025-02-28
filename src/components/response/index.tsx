@@ -1,5 +1,5 @@
 import { Panel } from '@components/panel'
-import { FCSelect } from '@egret/fusion-components'
+import { FCSelect } from '@i18u/fusion-components'
 import { replacer } from '@helper/stringify'
 import { AppCtx } from '@state/app-ctx'
 import React, { FC, useContext, useState } from 'react'
